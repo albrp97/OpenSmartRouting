@@ -14,6 +14,29 @@ OpenSmartRouting is intended to replace a paid delivery routing app with a free 
 
 The initial motivation comes from a practical family use case: a delivery driver working across smaller towns and dispersed areas in Spain needs better routing without paying for a commercial service.
 
+## Repository setup status
+
+This repository now has a Harmonic Coding-style runtime baseline so it is ready to be used later for planning, research, setup, and implementation.
+
+Added setup layer:
+
+- `AGENTS.md`
+- `.github/copilot-instructions.md`
+- `.github/instructions/`
+- `.github/prompts/`
+- `harmonic-custom/`
+- `NEXT_STEPS.md`
+- workflow eval scaffolding
+
+What has **not** been done yet:
+
+- the planning breakdown has not been executed
+- no research document has been written yet
+- no experiments have been run yet
+- no MVP implementation has started yet
+
+Use `NEXT_STEPS.md` for the ordered follow-up work.
+
 ## Core problem
 
 The problem is not just "show a route on a map."

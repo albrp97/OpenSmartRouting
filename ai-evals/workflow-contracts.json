@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "name": "root instructions exist",
+      "type": "file_exists",
+      "path": "AGENTS.md"
+    },
+    {
+      "name": "copilot instructions exist",
+      "type": "file_exists",
+      "path": ".github/copilot-instructions.md"
+    },
+    {
+      "name": "instruction files exist",
+      "type": "glob_min",
+      "pattern": ".github/instructions/*.instructions.md",
+      "min": 6
+    },
+    {
+      "name": "workflow prompts exist",
+      "type": "glob_min",
+      "pattern": ".github/prompts/*.prompt.md",
+      "min": 20
+    },
+    {
+      "name": "custom skills exist",
+      "type": "glob_min",
+      "pattern": "harmonic-custom/skills/*/SKILL.md",
+      "min": 13
+    },
+    {
+      "name": "next steps exists",
+      "type": "file_exists",
+      "path": "NEXT_STEPS.md"
+    }
+  ]
+}
