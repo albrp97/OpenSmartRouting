@@ -35,6 +35,7 @@ source = ["src/opensmartrouting"]
 
 [tool.coverage.report]
 show_missing = true
+fail_under = 80
 
 [tool.ruff]
 line-length = 100
