@@ -431,6 +431,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
   - 2026-07-08 — In Progress (adding a post-build smoke-test step to `release.yml`).
+  - 2026-07-08 — Done. Locally validated the venv/install/run approach against a real `uv build` output. Live-validated by pushing a real `v0.0.1-test2` tag: confirmed via `gh run view --log` that the "Smoke test the built wheel" step ran and printed `opensmartrouting 0.0.1 (scaffold only, no routing logic yet)` from the isolated scratch venv before the release step. Cleaned up the test tag and test GitHub Release afterward.
 
 ### Ticket P0-E0-T22 — Add a broken-link checker for docs
 
