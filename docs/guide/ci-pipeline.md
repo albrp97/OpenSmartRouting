@@ -11,21 +11,31 @@ flowchart TD
     A["Create branch\nphase-N/pN-eN-tM-topic"] --> B["Push commits"]
     B --> C["Open PR against main"]
 
-    C --> D1["lint-and-test\n(pr-checks.yml)\nREQUIRED"]
+    C --> L1
+    subgraph LT["lint-and-test (pr-checks.yml) — REQUIRED"]
+        L1["1. uv lock --check\n(lockfile drift)"] --> L2["2. ruff format --check\n(formatting)"]
+        L2 --> L3["3. ruff check\n(lint)"]
+        L3 --> L4["4. mypy\n(type check)"]
+        L4 --> L5["5. vulture\n(dead code)"]
+        L5 --> L6["6. yamllint\n(YAML syntax)"]
+        L6 --> L7["7. pip-audit\n(dependency CVEs)"]
+        L7 --> L8["8. pytest --cov\n(tests + 80% coverage gate)"]
+    end
+    L8 --> E
+
     C --> D2["secret-scan\n(pr-checks.yml)\nadvisory"]
     C --> D3["analyze\n(codeql.yml)\nadvisory"]
     C --> D4["docs-links\n(docs-links.yml)\nadvisory, only on *.md changes"]
     C --> D5["workflow-evals\n(workflow-evals.yml)\nadvisory"]
 
-    D1 --> E{All checks green?\nin practice, PRs wait for\nevery job even though only\nlint-and-test is enforced}
-    D2 --> E
+    D2 --> E{All checks green?\nin practice, PRs wait for\nevery job even though only\nlint-and-test is enforced}
     D3 --> E
     D4 --> E
     D5 --> E
 
     E -->|yes| F["Squash-merge PR\ngh pr merge --squash --delete-branch"]
     E -->|no, real failure| G["Fix on same branch,\npush, checks re-run"]
-    G --> D1
+    G --> L1
 
     F --> H["Delete branch,\ngit fetch --prune locally"]
     H --> I["main updated"]
