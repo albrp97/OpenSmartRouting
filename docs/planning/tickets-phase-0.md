@@ -22,7 +22,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P0
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Give the repo a real Python package layout instead of placeholder folders.
 - **Scope:** Add `pyproject.toml`, a `src/opensmartrouting/` package with an entry point, and a dependency/lock manager (`uv`). Replace the `src/.gitkeep` and `tests/.gitkeep` placeholders as needed.
 - **Steps:**
@@ -35,6 +35,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (starting scaffolding work: pyproject.toml, src package, uv lock file).
+  - 2026-07-08 — Done. Added `pyproject.toml` (hatchling build, `opensmartrouting` CLI entry point), `src/opensmartrouting/` package (`__init__.py`, `cli.py`), `tests/` package with a scaffold test, and `uv.lock`. Validated with `uv sync`, `python -c "import opensmartrouting"`, `uv run pytest` (2 passed), and `uv run opensmartrouting`. Documented `uv` usage and rationale in README.md.
 
 ### Ticket P0-E0-T2 — Add local formatting and linting
 

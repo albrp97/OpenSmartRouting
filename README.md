@@ -32,7 +32,7 @@ What has **not** been done yet:
 
 - the experiment plan has not been written yet
 - no experiments have been run yet
-- no MVP implementation has started yet
+- no MVP routing logic has been implemented yet (only the Phase 0 Python package scaffold exists)
 
 Planning work completed so far:
 
@@ -46,6 +46,26 @@ Planning work completed so far:
 - `docs/research/free-routing-stack.md` now compares the free road, geocoding, routing, and optimization options
 
 Use `NEXT_STEPS.md` for the ordered follow-up work.
+
+## Local development setup
+
+The project uses [`uv`](https://docs.astral.sh/uv/) as the single dependency, environment, and packaging manager. It was chosen because it is free, fast, single-binary, and replaces the pip/venv/pip-tools combination with one tool — a good fit for a lean Python CLI project.
+
+```bash
+# install uv (one-time, per machine)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# install the project and its dependencies into a local .venv
+uv sync
+
+# run the placeholder CLI
+uv run opensmartrouting
+
+# run tests
+uv run pytest
+```
+
+`pyproject.toml` defines the package (`src/opensmartrouting/`) and the `opensmartrouting` CLI entry point. `uv.lock` pins exact dependency versions for reproducible installs. This is Phase 0 scaffolding only — no routing logic yet.
 
 ## Core problem
 
