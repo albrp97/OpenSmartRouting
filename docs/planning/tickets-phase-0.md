@@ -510,7 +510,28 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created during P0-E0-T24's reconciliation: `docs/guide/quality-gates.md` listed "Pre-commit hooks mirroring CI checks" as Active Now citing P0-E0-T26, but no such ticket or config ever existed — P0-E0-T26 is the Phase 1 readiness ticket. This new ticket closes that gap).
 
-### Ticket P0-E0-T26 — Review Phase 0 work for inconsistencies and required changes
+### Ticket P0-E0-T26 — Document the CI/CD pipeline with a diagram
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Done
+- **Objective:** Give a single reference that shows exactly what runs in the pipeline, when, and in what order, so a contributor does not have to reverse-engineer it from five separate workflow YAML files.
+- **Scope:** Add a new doc (`docs/guide/ci-pipeline.md`) containing: (1) a diagram (Mermaid, renders natively on GitHub) of the branch → PR → CI jobs → merge → release flow, showing every workflow file, its triggers, and required vs advisory status; (2) a written breakdown of every check that runs, what it validates, and which workflow file/job it lives in, cross-referencing `docs/guide/quality-gates.md` rather than duplicating it. Link the new doc from `CONTRIBUTING.md` and `README.md` where the PR flow is already described.
+- **Steps:**
+  1. Enumerate the current workflow files (`pr-checks.yml`, `codeql.yml`, `docs-links.yml`, `workflow-evals.yml`, `release.yml`) and their triggers/jobs/required-check status.
+  2. Draw a Mermaid flowchart covering: branch creation → PR opened → which jobs run on which path/trigger → required check (`lint-and-test`) vs advisory checks → squash-merge → branch deletion → release workflow (tag push → build → smoke test → GitHub Release).
+  3. Write the accompanying prose breakdown, one short entry per check, linking to `docs/guide/quality-gates.md` for the "why."
+  4. Link the new doc from `CONTRIBUTING.md`'s "Pull request flow" section and `README.md` if it references CI.
+- **Acceptance:** The diagram renders correctly on GitHub (valid Mermaid syntax) and accurately reflects the current workflow files at the time of merge (no job, trigger, or required-check status is missing or wrong).
+- **Validation:** Cross-check every job listed in the diagram/table against the actual `on:` triggers and `jobs:` in each workflow YAML file; confirm no workflow file is left undocumented and no documented job is missing from the YAML.
+- **Dependencies:** P0-E0-T7, P0-E0-T11, P0-E0-T16, P0-E0-T17, P0-E0-T22
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created; user asked whether pipeline/test documentation and a diagram existed — it did not, only `docs/guide/quality-gates.md` (what/why) and `CONTRIBUTING.md` (branch/PR conventions in prose) existed, with no visual diagram or full step-by-step breakdown).
+  - 2026-07-08 — In Progress (writing `docs/guide/ci-pipeline.md` with a Mermaid diagram and per-check breakdown).
+  - 2026-07-08 — Done (added `docs/guide/ci-pipeline.md` with a Mermaid flowchart and a triggers/required-check table; cross-checked every job against the live `.github/workflows/*.yml` files and the actual branch protection `required_status_checks` (only `lint-and-test` is required). Linked from `CONTRIBUTING.md` and `README.md`. Live-validated on PR #35: `docs-links` passed cleanly against the new doc's links, and all other checks (`lint-and-test`, `secret-scan`, CodeQL `analyze`, `workflow-evals`) passed).
+
+### Ticket P0-E0-T27 — Review Phase 0 work for inconsistencies and required changes
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
@@ -519,16 +540,16 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Objective:** Review the completed Phase 0 work as a whole and identify inconsistencies, gaps, or changes needed before the phase is considered closed.
 - **Scope:** Review all Phase 0 artifacts together (scaffolding, CI workflows, docs, conventions) for contradictions, missing links, or drift between what was planned and what was actually built. Rework or re-open earlier tickets in this file if the review finds real gaps.
 - **Steps:**
-  1. Re-read the Phase 0 artifacts together: `pyproject.toml`, CI workflow files, `README.md`/`CONTRIBUTING.md` conventions, `CHANGELOG.md`, `docs/guide/quality-gates.md`, and `docs/planning/phases.md` Phase 0 section.
+  1. Re-read the Phase 0 artifacts together: `pyproject.toml`, CI workflow files, `README.md`/`CONTRIBUTING.md` conventions, `CHANGELOG.md`, `docs/guide/quality-gates.md`, `docs/guide/ci-pipeline.md`, and `docs/planning/phases.md` Phase 0 section.
   2. Compare what was delivered against the Phase 0 "Expected outputs" in `docs/planning/phases.md`.
   3. Either mark specific earlier tickets **Needs Rework** with a reason, or confirm the phase outputs are internally consistent enough to close.
 - **Acceptance:** The repo contains a concise Phase 0 review result that either lists the required fixes (with ticket-level rework flags) or states the phase is consistent enough to close.
 - **Validation:** Verify the review explicitly checks every Phase 0 "Expected output" and every ticket in this file.
-- **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23, P0-E0-T24, P0-E0-T25
+- **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23, P0-E0-T24, P0-E0-T25, P0-E0-T26
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the rest of Phase 0's execution tickets).
 
-### Ticket P0-E0-T27 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
+### Ticket P0-E0-T28 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
@@ -538,11 +559,11 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Scope:** Cross-check `docs/planning/tickets-phase-1.md` against the delivered Phase 0 baseline. Since Phase 1 tickets already exist, this is a reconciliation pass, not a from-scratch planning pass.
 - **Steps:**
   1. Re-read `docs/planning/tickets-phase-1.md` and confirm none of its tickets assumed a different local/CI setup than what Phase 0 actually delivered.
-  2. If Phase 0 review (P0-E0-T26) found deferred or follow-up work that is not just a rework of an existing ticket, add it as a new ticket in this file with status **Not Started**, rather than leaving it implicit.
+  2. If Phase 0 review (P0-E0-T27) found deferred or follow-up work that is not just a rework of an existing ticket, add it as a new ticket in this file with status **Not Started**, rather than leaving it implicit.
   3. Record the reconciliation result (clean handoff, or list of adjustments made) at the end of this file.
 - **Acceptance:** The repo states explicitly that Phase 1 tickets remain valid after Phase 0 setup, or lists the adjustments made to either phase's ticket set.
 - **Validation:** Verify the reconciliation note cross-references specific ticket IDs in both files rather than making a general claim.
-- **Dependencies:** P0-E0-T26
+- **Dependencies:** P0-E0-T27
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the Phase 0 review ticket).
 
@@ -590,7 +611,8 @@ Finally, the phase-closing sequence:
 
 24. **P0-E0-T24** — Write the now-vs-later setup boundary note
 25. **P0-E0-T25** — Add pre-commit hooks mirroring CI checks
-26. **P0-E0-T26** — Review Phase 0 work for inconsistencies and required changes
-27. **P0-E0-T27** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
+26. **P0-E0-T26** — Document the CI/CD pipeline with a diagram
+27. **P0-E0-T27** — Review Phase 0 work for inconsistencies and required changes
+28. **P0-E0-T28** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 These stay intentionally narrow so the DevOps baseline can be delivered in small, independently verifiable steps.
