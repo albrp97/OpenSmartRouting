@@ -5,7 +5,7 @@ description = "Free, Python-first, CLI-first delivery route optimization for Spa
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-dependencies = []
+dependencies = ["requests>=2.0"]
 
 [project.scripts]
 opensmartrouting = "opensmartrouting.cli:main"
