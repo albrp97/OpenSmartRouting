@@ -103,7 +103,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Give the project an explicit, lightweight branch and commit convention.
 - **Scope:** Document short-lived feature branches off `main`, and a simple imperative commit style, in a `CONTRIBUTING.md` or a setup section of `README.md`.
 - **Steps:**
@@ -115,6 +115,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (writing `CONTRIBUTING.md`, formalizing the branch/commit convention already used in P0-E0-T1 through T4).
+  - 2026-07-08 — Done. Added `CONTRIBUTING.md` documenting: `main` stays deployable, branch naming (`phase-<n>/p<phase>-e<epic>-t<ticket>-<short-topic>`), commit message format (ticket-ID-prefixed imperative summary + bullet list + `Co-authored-by` when AI-assisted), and that ticket Status/Status History updates are part of the same commit. Linked from `README.md`'s local development setup section. Re-read against the acceptance criteria: answers both "what do I name my branch" and "how do I write my commit message" unambiguously, matching the convention already used in T1-T4.
 
 ### Ticket P0-E0-T6 — Add the PR template and document the PR flow
 

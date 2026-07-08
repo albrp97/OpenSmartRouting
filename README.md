@@ -74,6 +74,8 @@ make check
 
 `pyproject.toml` defines the package (`src/opensmartrouting/`) and the `opensmartrouting` CLI entry point. `uv.lock` pins exact dependency versions for reproducible installs. This is Phase 0 scaffolding only — no routing logic yet.
 
+See `CONTRIBUTING.md` for the branch naming and commit message conventions.
+
 ## Core problem
 
 The problem is not just "show a route on a map."
