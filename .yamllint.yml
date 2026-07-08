@@ -1,0 +1,11 @@
+# yamllint config: keep this low-noise — we care about catching genuine syntax
+# errors and obvious mistakes (duplicate keys, bad indentation), not enforcing
+# a strict style guide.
+extends: default
+
+rules:
+  line-length: disable
+  document-start: disable
+  truthy: disable
+  comments: disable
+  comments-indentation: disable

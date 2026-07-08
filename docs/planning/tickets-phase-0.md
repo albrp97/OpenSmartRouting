@@ -459,7 +459,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P3
-- **Status:** Not Started
+- **Status:** In Progress
 - **Objective:** Catch malformed YAML/config drift in `harmonic-custom/config.yml` before it silently breaks the runtime.
 - **Scope:** Add a lightweight YAML syntax/schema check (e.g. `yamllint`, or a minimal JSON-schema check via `python -c`) covering `harmonic-custom/config.yml` and other repo-controlled YAML (`.github/workflows/*.yml`, `.github/dependabot.yml`).
 - **Steps:**
@@ -470,6 +470,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `yamllint` dev dependency, config, `make yamllint` target, and CI step).
 
 ### Ticket P0-E0-T24 — Write the now-vs-later setup boundary note
 
