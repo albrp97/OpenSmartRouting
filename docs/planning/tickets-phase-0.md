@@ -143,7 +143,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P0
-- **Status:** Not Started
+- **Status:** In Progress
 - **Objective:** Make lint and test checks run automatically and block merge on failure.
 - **Scope:** Add a GitHub Actions workflow (separate from the existing `workflow-evals.yml`) that installs the project, runs `ruff format --check`, `ruff check`, and `pytest` on every PR to `main`.
 - **Steps:**
@@ -155,6 +155,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T4
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `.github/workflows/pr-checks.yml` using `astral-sh/setup-uv` with caching, mirroring the local `make check` steps).
 
 ### Ticket P0-E0-T8 — Add branch protection guidance for `main`
 
