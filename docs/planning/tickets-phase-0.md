@@ -255,6 +255,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T4, P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `mypy` dev dependency, `[tool.mypy]` config, `Makefile` target, and CI step).
 
 ### Ticket P0-E0-T13 — Add dependency vulnerability scanning with pip-audit
 

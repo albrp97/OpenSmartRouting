@@ -1,8 +1,8 @@
-.PHONY: check format lint test
+.PHONY: check format lint types test
 
-# Run the full local quality gate: format check, lint, then tests.
+# Run the full local quality gate: format check, lint, type check, then tests.
 # Fails fast on the first failing step (make stops at the first non-zero exit code).
-check: format lint test
+check: format lint types test
 	@echo "All checks passed."
 
 format:
@@ -10,6 +10,9 @@ format:
 
 lint:
 	uv run ruff check .
+
+types:
+	uv run mypy
 
 test:
 	uv run pytest --cov=opensmartrouting --cov-report=term-missing
