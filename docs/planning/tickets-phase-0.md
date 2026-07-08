@@ -295,6 +295,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
   - 2026-07-08 — In Progress (adding `.github/dependabot.yml`).
+  - 2026-07-08 — Done. Validated via the GitHub API: `repos/.../vulnerability-alerts` and `repos/.../dependabot/alerts` both responded successfully after merge (alerts list returned `[]`, confirming Dependabot recognized the config with no current findings) and `security_and_analysis.dependabot_security_updates.status` reports `enabled`. Also enabled repo-level vulnerability alerts and automated security fixes via `gh api --method PUT` as part of this validation.
 
 ### Ticket P0-E0-T15 — Enable GitHub secret scanning and push protection
 
