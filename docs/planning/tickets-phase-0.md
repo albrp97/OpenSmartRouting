@@ -123,7 +123,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Make pull requests consistent and scoped to one ticket each.
 - **Scope:** Add `.github/PULL_REQUEST_TEMPLATE.md` and document that one PR maps to one ticket and must pass local validation before opening.
 - **Steps:**
@@ -135,6 +135,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T5
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `.github/PULL_REQUEST_TEMPLATE.md` and a PR-flow section in `CONTRIBUTING.md`).
+  - 2026-07-08 — Done. Added `.github/PULL_REQUEST_TEMPLATE.md` (Ticket/What changed/Validation/Scope fields) and a "Pull request flow" section in `CONTRIBUTING.md` (one PR per ticket, `make check` must pass before opening, squash-merge + delete branch + prune). Validated by opening this ticket's own PR as a draft with `gh pr create --draft` and confirming the template auto-populated the body with all required fields before filling it in and marking it ready.
 
 ### Ticket P0-E0-T7 — Add the CI workflow for lint and test on every PR
 
