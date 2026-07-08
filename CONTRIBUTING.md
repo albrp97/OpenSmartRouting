@@ -143,6 +143,13 @@ gh api --method PUT repos/albrp97/OpenSmartRouting/automated-security-fixes
 `.github/workflows/pr-checks.yml` also runs `gitleaks` on every PR as a CI-visible backup to
 GitHub's background scanning (see the "Secret scanning" step in that workflow).
 
+## Keeping `uv.lock` in sync
+
+CI runs `uv lock --check` before installing dependencies, so any PR that changes `pyproject.toml`
+dependencies without regenerating `uv.lock` will fail fast with a clear error. If you change a
+dependency, run `uv lock` locally and commit the updated `uv.lock` alongside your `pyproject.toml`
+change.
+
 ## Release process
 
 Releases are lean and manual — no automatic version bumping.
