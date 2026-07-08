@@ -203,7 +203,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Define how the Python CLI is built into an installable artifact.
 - **Scope:** Confirm the build backend already declared in `pyproject.toml` (Ticket P0-E0-T1) produces a valid wheel/sdist, and document the packaging command.
 - **Steps:**
@@ -215,6 +215,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T1
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (running `uv build`, then validating the wheel installs cleanly in a scratch venv).
+  - 2026-07-08 — Done. `uv build` produces both `opensmartrouting-0.0.1-py3-none-any.whl` and the sdist `opensmartrouting-0.0.1.tar.gz` in `dist/` using the existing `hatchling` backend. Validated by installing the wheel into a fresh scratch venv (`uv venv` + `uv pip install`) and confirming both `opensmartrouting` (CLI entry point) and `python -c "import opensmartrouting"` work from the installed package, not just the dev checkout. Documented the build/install commands in `README.md`'s new "Packaging" section, and explicitly noted PyPI publishing is out of scope (personal/local CLI use case). `dist/` is already gitignored.
 
 ### Ticket P0-E0-T11 — Define the release process (versioning, tagging, changelog)
 
