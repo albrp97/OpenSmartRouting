@@ -63,6 +63,10 @@ uv run opensmartrouting
 
 # run tests
 uv run pytest
+
+# format and lint (ruff is the single tool for both)
+uv run ruff format .
+uv run ruff check .
 ```
 
 `pyproject.toml` defines the package (`src/opensmartrouting/`) and the `opensmartrouting` CLI entry point. `uv.lock` pins exact dependency versions for reproducible installs. This is Phase 0 scaffolding only — no routing logic yet.
