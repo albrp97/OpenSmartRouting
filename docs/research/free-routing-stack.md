@@ -102,6 +102,65 @@ The project is focused on delivery routing in Spain, so Spain suitability and da
 
 **Current recommendation:** compare **simple heuristics** against **OR-Tools** before committing to solver complexity.
 
+## Geocoder operating constraints (decision note)
+
+This is the decision note required to clear geocoding for research and later experiments: which
+constraints are confirmed and acceptable to build against now, and which are still unresolved
+assumptions that require explicit caution or a fallback plan.
+
+### Confirmed operating limits
+
+- **Nominatim public service** (`nominatim.openstreetmap.org`): confirmed via the
+  [official usage policy](https://operations.osmfoundation.org/policies/nominatim/) —
+  hard cap of **1 request/second**, a real (non-default) `User-Agent` or `Referer` is required,
+  **bulk/periodic geocoding is explicitly discouraged**, and any bulk task must run single-threaded
+  on a single machine with results cached client-side. This rules out the public Nominatim
+  endpoint as a production dependency for anything beyond light, cached, interactive lookups; it
+  remains fine as a **benchmark/fallback** source during research, not as the primary path.
+- **Photon public service** (`photon.komoot.io`): confirmed via its
+  [terms of use](https://photon.komoot.io/) — usable for the project, but "extensive usage will be
+  throttled" with **no published quota or SLA**, and the service explicitly does not guarantee
+  availability. Acceptable for research-phase spot checks and as a lighter OSM-based fallback;
+  not acceptable as a dependency with an uptime or throughput guarantee without self-hosting.
+- **CartoCiudad** (`cartociudad.es` REST geocoder): the
+  [service documentation](https://www.cartociudad.es/web/portal/directorio-de-servicios/geoprocesamiento)
+  describes the API surface (`candidates`/`find` endpoints) but **does not publish any explicit
+  rate limit, quota, or SLA** on the pages reviewed. This is the strongest Spain-specific
+  candidate, but its exact acceptable-use terms are an unresolved assumption (see below), not a
+  confirmed limit.
+- **Pelias**: no public hosted service is used in this project's plan — it is evaluated only as a
+  **self-hosted** option, so the operating constraint is infrastructure cost/complexity, not a
+  third-party rate limit.
+
+### Unresolved assumptions (require caution or a fallback plan)
+
+- Whether CartoCiudad's actual acceptable-use terms (rate limits, bulk-use policy, required
+  attribution) match the project's intended request volume and caching model — not confirmed by
+  any published policy found during this review. **Caution:** treat CartoCiudad as unconfirmed for
+  sustained/bulk use until its terms are verified directly (e.g., by contacting the maintaining
+  body or finding a more detailed terms page) or a self-hosted alternative is proven out.
+- Whether research-phase experiment traffic (batches of test addresses, repeated runs) would count
+  as "bulk geocoding" under Nominatim's policy even though it is not production traffic.
+  **Caution:** apply Nominatim's bulk-task rules (single thread, single machine, cached results,
+  ≤4 requests/minute for long-running scripts) to all experiment scripts as a precaution, not only
+  to hypothetical production use.
+- Photon's and CartoCiudad's exact throttling thresholds are not published, so a script that works
+  today could start failing without warning. **Fallback:** any experiment or later CLI code that
+  calls a public geocoder must implement request-level caching and a documented fallback path to a
+  second geocoder (per the shortlists above) so a single service's undocumented throttling does
+  not block the whole workflow.
+
+### What is acceptable to build against now
+
+- Small-scale, cached, single-threaded experiment queries against CartoCiudad as the primary
+  candidate, and Photon or Nominatim as a secondary comparison source, are acceptable for the
+  research phase.
+- Any code written against these services from this point forward should cache results and avoid
+  concurrent/bulk request patterns by default, so the research code does not itself violate the
+  confirmed Nominatim policy or risk undocumented throttling from Photon/CartoCiudad.
+- No geocoder should be treated as a guaranteed-availability production dependency until either its
+  terms are confirmed in writing or it is self-hosted.
+
 ## Practical shortlist
 
 ### Shortlist A: simplest first experiment stack

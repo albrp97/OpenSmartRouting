@@ -76,7 +76,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 1 — Free data and geocoding research
 - **Priority:** P0
-- **Status:** Ready
+- **Status:** Done
 - **Objective:** Clarify the operational constraints that could block the chosen geocoding path.
 - **Scope:** Review public-service limits, self-hosting implications, caching implications, and any unresolved usage concerns that affect research and later experiments.
 - **Steps:**
@@ -88,6 +88,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P1-E1-T3
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Ready**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — In Progress (starting the geocoder operating-constraints review).
+  - 2026-07-08 — Done. Reviewed the published usage terms for the three geocoders already shortlisted in `docs/research/free-routing-stack.md`: Nominatim's official usage policy (1 req/s hard cap, required User-Agent/Referer, bulk geocoding discouraged, must cache), Photon's terms of use (usable but throttled with no published quota/SLA), and CartoCiudad's service documentation (API surface described, but no explicit rate limit/quota/SLA published on the pages found). Pelias remains self-hosted-only in this project's plan, so its constraint is infra cost, not a third-party limit. Added a new "Geocoder operating constraints (decision note)" section distinguishing confirmed limits from unresolved assumptions (CartoCiudad's exact bulk-use terms; whether research-phase batch traffic counts as "bulk" under Nominatim's policy; undocumented throttling thresholds for Photon/CartoCiudad) and stating what is acceptable to build against now (small-scale, cached, single-threaded queries against CartoCiudad primary with Photon/Nominatim as secondary comparison; no geocoder treated as a guaranteed-availability dependency until confirmed or self-hosted).
 
 ### Ticket P1-E2-T1 — Compare routing-engine candidates
 
@@ -166,7 +168,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 2 — Routing engine evaluation
 - **Priority:** P1
-- **Status:** Blocked
+- **Status:** Ready
 - **Objective:** Review the completed Phase 1 work as a whole and identify inconsistencies, gaps, or changes needed before the phase is considered closed.
 - **Scope:** Review the Phase 1 planning and research artifacts together, check for contradictions, missing links, stale assumptions, or places where the phase outputs no longer match each other.
 - **Steps:**
@@ -178,13 +180,14 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P1-E1-T4, P1-E2-T2, P1-E2-T3
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Blocked**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user requested all Phase 1 tickets be set to Ready so execution order is not gated on dependency completion; dependencies P1-E1-T4, P1-E2-T2, P1-E2-T3 are not yet Done, so this ticket should still be executed after them in practice even though its status now reads Ready).
 
 ### Ticket P1-E3-T1 — Plan the ticket set for Phase 2
 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 3 — Experiment harness
 - **Priority:** P1
-- **Status:** Blocked
+- **Status:** Ready
 - **Objective:** Create the minimal ticket set that will drive Phase 2 once Phase 1 is closed.
 - **Scope:** Define the smallest coherent Phase 2 tickets for experiment inputs, evaluation criteria use, matrix generation comparisons, and optimization comparisons.
 - **Steps:**
@@ -196,6 +199,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P1-E2-T5
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Blocked**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user requested all Phase 1 tickets be set to Ready; dependency P1-E2-T5 is not yet Done, so this ticket should still be executed last in practice even though its status now reads Ready).
 
 ## Current execution order
 
