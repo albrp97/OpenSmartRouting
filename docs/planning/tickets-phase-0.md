@@ -275,6 +275,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `pip-audit` dev dependency and CI step).
+  - 2026-07-08 — Done. Validated locally (`uv run pip-audit` exits 0, "No known vulnerabilities found" against the current empty runtime-dependency set) and live on PR #17 where the `Dependency vulnerability scan` CI step ran and passed.
 
 ### Ticket P0-E0-T14 — Add Dependabot configuration
 
