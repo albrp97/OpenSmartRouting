@@ -559,7 +559,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Blocked
+- **Status:** Done
 - **Objective:** Confirm the Phase 0 baseline does not change anything assumed by the already-written Phase 1 (Research) tickets, and record any genuine Phase 0 follow-up work as new tickets rather than silently expanding scope.
 - **Scope:** Cross-check `docs/planning/tickets-phase-1.md` against the delivered Phase 0 baseline. Since Phase 1 tickets already exist, this is a reconciliation pass, not a from-scratch planning pass.
 - **Steps:**
@@ -571,6 +571,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T27
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the Phase 0 review ticket).
+  - 2026-07-08 — In Progress (P0-E0-T27 is Done; starting the Phase 1 reconciliation pass).
+  - 2026-07-08 — Done. Re-read all 10 tickets in `docs/planning/tickets-phase-1.md` (P1-E1-T1–T4, P1-E2-T1–T5, P1-E3-T1): none reference a local command, CI check, Makefile target, or branch/PR convention that differs from what Phase 0 actually delivered — every Phase 1 ticket's Scope/Steps/Acceptance/Validation is about research artifacts (`docs/research/free-routing-stack.md`, `vision.md`, `docs/planning/*`), not tooling, so Phase 0's DevOps baseline does not constrain or contradict any of them. P0-E0-T27's review found no deferred/follow-up work beyond the Status-header fix already applied in that same ticket, so no new ticket was needed in either file. **Reconciliation result: clean handoff, no adjustments required to either ticket set.** Phase 1's `docs/planning/tickets-phase-1.md` "Current execution order" (P1-E1-T4, P1-E2-T3, P1-E2-T2, then the phase-closing P1-E2-T5 and P1-E3-T1) remains valid and can proceed as written once Phase 0 is closed.
 
 ## Current execution order
 
@@ -621,3 +623,18 @@ Finally, the phase-closing sequence:
 28. **P0-E0-T28** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 These stay intentionally narrow so the DevOps baseline can be delivered in small, independently verifiable steps.
+
+## Phase 0 → Phase 1 reconciliation (P0-E0-T28)
+
+All 28 Phase 0 tickets (P0-E0-T1–T28) are **Done**. Phase 0 is closed.
+
+Reconciliation against `docs/planning/tickets-phase-1.md`: all 10 Phase 1 tickets (P1-E1-T1–T4,
+P1-E2-T1–T5, P1-E3-T1) were re-read against the delivered Phase 0 baseline. None of them assume a
+local command, CI check, Makefile target, or branch/PR convention different from what Phase 0
+actually built — every Phase 1 ticket's scope is about research artifacts
+(`docs/research/free-routing-stack.md`, `vision.md`, `docs/planning/*`), independent of the
+DevOps tooling Phase 0 delivered.
+
+**Result: clean handoff, no adjustments made to either ticket set.** Phase 1 can proceed exactly
+as planned, starting with its own "Current execution order" (P1-E1-T4, P1-E2-T3, P1-E2-T2, then
+the phase-closing P1-E2-T5 and P1-E3-T1).
