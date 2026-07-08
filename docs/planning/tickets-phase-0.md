@@ -530,6 +530,7 @@ Every ticket also carries a **Status History** log recording each status change 
   - 2026-07-08 — Not Started (ticket created; user asked whether pipeline/test documentation and a diagram existed — it did not, only `docs/guide/quality-gates.md` (what/why) and `CONTRIBUTING.md` (branch/PR conventions in prose) existed, with no visual diagram or full step-by-step breakdown).
   - 2026-07-08 — In Progress (writing `docs/guide/ci-pipeline.md` with a Mermaid diagram and per-check breakdown).
   - 2026-07-08 — Done (added `docs/guide/ci-pipeline.md` with a Mermaid flowchart and a triggers/required-check table; cross-checked every job against the live `.github/workflows/*.yml` files and the actual branch protection `required_status_checks` (only `lint-and-test` is required). Linked from `CONTRIBUTING.md` and `README.md`. Live-validated on PR #35: `docs-links` passed cleanly against the new doc's links, and all other checks (`lint-and-test`, `secret-scan`, CodeQL `analyze`, `workflow-evals`) passed).
+  - 2026-07-08 — Done (follow-up refinement: user noted the coverage threshold step wasn't visible in the diagram because `lint-and-test` was drawn as one opaque node. Expanded it into a `subgraph` showing its 8 internal sequential steps — lockfile check, format, lint, mypy, vulture, yamllint, pip-audit, then `pytest --cov` with the 80% coverage gate — so the diagram now matches the step-by-step table below it).
 
 ### Ticket P0-E0-T27 — Review Phase 0 work for inconsistencies and required changes
 
