@@ -63,7 +63,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P0
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Give the project a working local test command before any real routing logic exists.
 - **Scope:** Add `pytest` as a dev dependency and one smoke test that proves the test runner and package import path both work.
 - **Steps:**
@@ -75,6 +75,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T1
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (`pytest` dependency and a scaffold smoke test already exist from T1; confirming discovery/verbosity and formalizing this as the official local test command).
+  - 2026-07-08 — Done. Confirmed via `uv run pytest -v` that `pytest` (configured through `[tool.pytest.ini_options]` in `pyproject.toml`, `testpaths = ["tests"]`) discovers and runs both scaffold tests (`test_package_has_version`, `test_cli_main_runs`), 2 passed. `uv run pytest` is already documented in `README.md` as the local test command (added in T1). `.pytest_cache/` already gitignored. No code changes needed beyond what T1 provided; this ticket formally validates and closes the acceptance criteria.
 
 ### Ticket P0-E0-T4 — Add a single local "check" command
 
