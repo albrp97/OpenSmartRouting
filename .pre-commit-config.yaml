@@ -1,0 +1,23 @@
+# Pre-commit hooks: fast, opt-in local checks that mirror the CI quality gate.
+#
+# Setup (once per clone): uv run pre-commit install
+# Run against everything:  uv run pre-commit run --all-files
+#
+# Deliberately kept to fast checks only (format, lint, secret detection). The
+# slower checks (mypy, vulture, pip-audit, tests) already fail fast in CI
+# (.github/workflows/pr-checks.yml) and are not duplicated here to keep local
+# commits quick. See docs/guide/ci-pipeline.md for the full CI breakdown.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.20
+    hooks:
+      - id: ruff-format
+        args: [--check]
+      - id: ruff
+        args: [--no-fix]
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", ".secrets.baseline"]

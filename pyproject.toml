@@ -23,6 +23,7 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.6",
     "yamllint>=1.35",
+    "pre-commit>=3.8",
     "mypy>=1.11",
     "pip-audit>=2.7",
     "vulture>=2.11",
