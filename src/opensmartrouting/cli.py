@@ -15,10 +15,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-def _untested_branch(flag: bool) -> str:
-    if flag:
-        return "a"
-    else:
-        return "b"
