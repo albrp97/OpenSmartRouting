@@ -34,13 +34,16 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Done**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user reset this ticket from Done to Ready, having found it and several others were marked Done in error; re-executing to confirm/complete the work properly).
+  - 2026-07-08 — In Progress (re-reviewing the road-data source rationale against the acceptance criteria).
+  - 2026-07-08 — Done. Verified `docs/research/free-routing-stack.md` already documented OSM's ODbL license and update support plus the Geofabrik Spain extract, but it never explicitly stated OpenStreetMap as *the* base road-data source or tied that choice back to the project's free-first/Python-first constraints. Added an explicit "Base road-data source: OpenStreetMap" statement at the top of the Road data section stating the source and three concrete reasons it fits the project (no license cost, native support across all four shortlisted routing engines, daily Spain coverage via Geofabrik).
 
 ### Ticket P1-E1-T2 — Record the road-data refresh path
 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 1 — Free data and geocoding research
 - **Priority:** P0
-- **Status:** Done
+- **Status:** Ready
 - **Objective:** Confirm how road-data freshness will be handled in the research path.
 - **Scope:** Document the practical refresh path for Spain extracts and note why it is enough for the current phase.
 - **Steps:**
@@ -52,13 +55,14 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P1-E1-T1
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Done**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user reset this ticket from Done to Ready, having found it and several others were marked Done in error; re-executing to confirm/complete the work properly).
 
 ### Ticket P1-E1-T3 — Compare Spain-first geocoding candidates
 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 1 — Free data and geocoding research
 - **Priority:** P0
-- **Status:** Done
+- **Status:** Ready
 - **Objective:** Compare the smallest useful set of geocoding candidates for the Spain delivery use case.
 - **Scope:** Cover CartoCiudad and at least the main OSM-based fallback options with their tradeoffs.
 - **Steps:**
@@ -70,13 +74,14 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Done**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user reset this ticket from Done to Ready, having found it and several others were marked Done in error; re-executing to confirm/complete the work properly).
 
 ### Ticket P1-E1-T4 — Review geocoder operating constraints
 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 1 — Free data and geocoding research
 - **Priority:** P0
-- **Status:** Done
+- **Status:** Ready
 - **Objective:** Clarify the operational constraints that could block the chosen geocoding path.
 - **Scope:** Review public-service limits, self-hosting implications, caching implications, and any unresolved usage concerns that affect research and later experiments.
 - **Steps:**
@@ -96,7 +101,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 2 — Routing engine evaluation
 - **Priority:** P0
-- **Status:** Done
+- **Status:** Ready
 - **Objective:** Compare the routing engines that are realistic candidates for the research and experiment phases.
 - **Scope:** Cover OSRM, Valhalla, GraphHopper, and pgRouting across licensing, Python fit, local practicality, and matrix support.
 - **Steps:**
@@ -108,6 +113,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P1-E1-T1, P1-E1-T2
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Done**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user reset this ticket from Done to Ready, having found it and several others were marked Done in error; re-executing to confirm/complete the work properly).
 
 ### Ticket P1-E2-T2 — Define the research exit criteria
 
@@ -150,7 +156,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 2 — Routing engine evaluation
 - **Priority:** P1
-- **Status:** Done
+- **Status:** Ready
 - **Objective:** Publish the current research recommendation without presenting it as a final architecture lock-in.
 - **Scope:** Summarize the strongest current stack candidates, the main tradeoffs, and the still-unproven items.
 - **Steps:**
@@ -162,6 +168,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P1-E1-T1, P1-E1-T2, P1-E1-T3, P1-E2-T1
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Done**; earlier transitions were not tracked before this date.
+  - 2026-07-08 — Ready (user reset this ticket from Done to Ready, having found it and several others were marked Done in error; re-executing to confirm/complete the work properly).
 
 ### Ticket P1-E2-T5 — Review Phase 1 work for inconsistencies and required changes
 

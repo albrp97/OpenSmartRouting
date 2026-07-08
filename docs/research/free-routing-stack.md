@@ -21,6 +21,12 @@ The project is focused on delivery routing in Spain, so Spain suitability and da
 
 ### Road data
 
+**Base road-data source: OpenStreetMap.** OpenStreetMap is the project's base road-data source
+because it is free and open (no licensing cost or paid tier), every routing engine shortlisted
+below (OSRM, Valhalla, GraphHopper, pgRouting) consumes OSM data natively, and it has full Spain
+coverage refreshed at least daily through Geofabrik (see below). This fits the project's
+free-first and Python-first constraints better than any commercial or closed road-data provider.
+
 - OpenStreetMap data is available under the **ODbL** license and the ecosystem supports both full data snapshots and frequent updates.  
   Sources: [OSM copyright](https://www.openstreetmap.org/copyright), [Planet.osm](https://wiki.openstreetmap.org/wiki/Planet.osm)
 - Geofabrik publishes a **Spain extract** and marks it as updated **daily**, with regional update files also available.  
