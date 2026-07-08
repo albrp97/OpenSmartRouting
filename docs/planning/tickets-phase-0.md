@@ -333,6 +333,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding a `gitleaks` CI job).
+  - 2026-07-08 — Done. Live-validated on PR #24: clean state passed both `lint-and-test` and `secret-scan`. A GitHub-PAT-shaped and an AWS-key-shaped fake string were not flagged (didn't match gitleaks' default regexes precisely), but a fake PEM `RSA PRIVATE KEY` block was correctly flagged and failed the `secret-scan` job. Discovered that gitleaks scans the PR's full commit range, so merely deleting the offending line in a later commit still left the check failing (the secret remained in history); reset the branch back to before the test commits (`git reset --hard` + force-push) to fully remove it from history, confirming the check passes again on a clean branch.
 
 ### Ticket P0-E0-T17 — Add CodeQL static analysis
 
