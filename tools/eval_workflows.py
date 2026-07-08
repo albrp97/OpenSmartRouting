@@ -23,14 +23,20 @@ def load_spec(path: Path) -> dict[str, Any]:
 
 def file_exists(root: Path, check: dict[str, Any]) -> Result:
     target = root / check["path"]
-    return Result(check["name"], target.exists(), f"{check['path']} {'exists' if target.exists() else 'is missing'}")
+    return Result(
+        check["name"],
+        target.exists(),
+        f"{check['path']} {'exists' if target.exists() else 'is missing'}",
+    )
 
 
 def glob_min(root: Path, check: dict[str, Any]) -> Result:
     matches = list(root.glob(check["pattern"]))
     minimum = int(check["min"])
     passed = len(matches) >= minimum
-    return Result(check["name"], passed, f"{len(matches)} matches for {check['pattern']} (min {minimum})")
+    return Result(
+        check["name"], passed, f"{len(matches)} matches for {check['pattern']} (min {minimum})"
+    )
 
 
 CHECKS = {

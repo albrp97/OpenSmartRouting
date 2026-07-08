@@ -43,7 +43,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P0
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Give the project one formatter/linter entrypoint instead of an ad hoc style.
 - **Scope:** Add `ruff` as the single formatting and linting tool, with a minimal `ruff` config in `pyproject.toml`.
 - **Steps:**
@@ -55,6 +55,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T1
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (`ruff` already a dev dependency from T1; adding `[tool.ruff]` config and running format/check).
+  - 2026-07-08 — Done. Added `[tool.ruff]`/`[tool.ruff.lint]`/`[tool.ruff.format]` config to `pyproject.toml` (line-length 100, py311 target, E/F/I/UP/B/SIM rule set, double-quote format). `ruff format .` reformatted `tools/eval_workflows.py` only (pure whitespace, no behavior change). `ruff format --check .` and `ruff check .` both pass clean; `pytest` still 2 passed.
 
 ### Ticket P0-E0-T3 — Add the local test command
 
