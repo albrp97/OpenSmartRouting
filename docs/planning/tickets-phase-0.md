@@ -83,7 +83,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Let a developer or AI run the entire local quality gate with one command.
 - **Scope:** Add a `Makefile` (or equivalent script) with a `check` target that runs `ruff format --check`, `ruff check`, and `pytest` in sequence.
 - **Steps:**
@@ -95,6 +95,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T2, P0-E0-T3
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding a Makefile with a `check` target wired to ruff format-check, ruff check, and pytest).
+  - 2026-07-08 — Done. Added `Makefile` with `check` (default), `format`, `lint`, `test` targets; `check` depends on all three in sequence so make's own dependency resolution fails fast at the first broken step. Validated against a clean repo (`make check` → exit 0, all three gates pass) and three deliberately broken cases (bad formatting, unused-import lint error, failing assertion) — each stopped `make check` at the correct step with a clear error and non-zero exit code. Documented `make check` in `README.md`.
 
 ### Ticket P0-E0-T5 — Document branch and commit conventions
 
