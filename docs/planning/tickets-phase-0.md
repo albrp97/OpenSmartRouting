@@ -497,7 +497,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P3
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Give fast local feedback that mirrors the CI quality gate, so obvious failures (format, lint, secrets) are caught before push instead of after opening a PR.
 - **Scope:** Add an opt-in `pre-commit` config running the same low-cost, fast checks already in `make check` (format, lint) plus a local gitleaks-style secret pre-check; do not duplicate the slower checks (mypy, vulture, pip-audit, tests) that already fail fast in CI. Opt-in only — do not force-install hooks on every clone.
 - **Steps:**
@@ -509,6 +509,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7, P0-E0-T16
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created during P0-E0-T24's reconciliation: `docs/guide/quality-gates.md` listed "Pre-commit hooks mirroring CI checks" as Active Now citing P0-E0-T26, but no such ticket or config ever existed — P0-E0-T26 is the Phase 1 readiness ticket. This new ticket closes that gap).
+  - 2026-07-08 — In Progress (adding `.pre-commit-config.yaml` using `ruff-pre-commit` mirrors and `detect-secrets` for local secret detection).
+  - 2026-07-08 — Done (added `.pre-commit-config.yaml` with `astral-sh/ruff-pre-commit@v0.15.20` (format + lint, matching the pinned local `ruff` version) and `Yelp/detect-secrets@v1.5.0` with a generated `.secrets.baseline` (empty — no existing findings). Documented opt-in setup (`uv run pre-commit install`) in `CONTRIBUTING.md`'s new "Local pre-commit hooks (opt-in)" section. Validated locally: `uv run pre-commit run --all-files` passes clean and matches `make check`'s format/lint result; a deliberately unformatted commit was blocked by `ruff-format`; a deliberate AWS-key-shaped secret was blocked by `detect-secrets` (2 detections: AWS Access Key + Secret Keyword); both test changes reverted, clean commit passes. No CI step added — this stays a local-only convenience per scope).
 
 ### Ticket P0-E0-T26 — Document the CI/CD pipeline with a diagram
 

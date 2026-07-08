@@ -151,6 +151,32 @@ dependencies without regenerating `uv.lock` will fail fast with a clear error. I
 dependency, run `uv lock` locally and commit the updated `uv.lock` alongside your `pyproject.toml`
 change.
 
+## Local pre-commit hooks (opt-in)
+
+For fast local feedback before a PR ever reaches CI, this repo ships an opt-in `pre-commit`
+config (`.pre-commit-config.yaml`) that mirrors the fast checks from `make check` — formatting
+(`ruff format`), linting (`ruff check`), and secret detection (`detect-secrets`). It deliberately
+does **not** duplicate the slower CI checks (mypy, vulture, pip-audit, tests) so local commits
+stay quick; those still run in CI on every PR.
+
+Set it up once per clone:
+
+```bash
+uv run pre-commit install
+```
+
+After that, the hooks run automatically on `git commit`. To run them against every file manually
+(e.g. after first installing, or after editing the hook config):
+
+```bash
+uv run pre-commit run --all-files
+```
+
+If `detect-secrets` flags a genuine false positive, mark it inline with a
+`# pragma: allowlist secret` comment rather than disabling the hook, and re-run
+`uv run detect-secrets scan --exclude-files 'uv.lock' > .secrets.baseline` to refresh the
+baseline. See `docs/guide/ci-pipeline.md` for how this compares to the full CI pipeline.
+
 ## Release process
 
 Releases are lean and manual — no automatic version bumping.
