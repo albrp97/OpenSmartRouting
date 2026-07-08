@@ -430,6 +430,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T11
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding a post-build smoke-test step to `release.yml`).
 
 ### Ticket P0-E0-T22 — Add a broken-link checker for docs
 

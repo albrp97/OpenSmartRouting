@@ -27,6 +27,11 @@ jobs:
         run: uv run pytest
       - name: Build wheel and sdist
         run: uv build
+      - name: Smoke test the built wheel
+        run: |
+          python3 -m venv /tmp/smoke-venv
+          /tmp/smoke-venv/bin/pip install --quiet dist/*.whl
+          /tmp/smoke-venv/bin/opensmartrouting
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
