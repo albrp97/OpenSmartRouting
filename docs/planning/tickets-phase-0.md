@@ -223,7 +223,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** In Progress
+- **Status:** Done
 - **Objective:** Define a lean, low-ceremony release process for the CLI.
 - **Scope:** Adopt manual semver git tags (`vX.Y.Z`) plus a `CHANGELOG.md`, and add a release workflow that builds and attaches artifacts to a GitHub Release when a tag is pushed.
 - **Steps:**
@@ -236,6 +236,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
   - 2026-07-08 — In Progress (adding `CHANGELOG.md`, documenting the tagging convention, and adding `.github/workflows/release.yml`).
+  - 2026-07-08 — Done. Live-validated by pushing a real `v0.0.1-test` tag (PR #12 merged first): the `Release` workflow ran, built the package, and created a GitHub Release marked `prerelease: true` (tag contains a hyphen). First run surfaced a real bug — `uv build`'s own generated `dist/.gitignore` was picked up by `files: dist/*` and attached as an unwanted `default.gitignore` asset alongside the wheel/sdist. Fixed in a follow-up PR (#13, merged) by restricting `files` to `dist/*.whl` and `dist/*.tar.gz` explicitly. Re-ran the same live tag validation against the fixed workflow: confirmed via `gh release view` that only `opensmartrouting-0.0.1-py3-none-any.whl` and `opensmartrouting-0.0.1.tar.gz` were attached, `prerelease: true`, and auto-generated release notes listed PRs #1-#13. Cleaned up: deleted the test GitHub Release (`gh release delete`) and the test tag both locally and on the remote.
 
 ### Ticket P0-E0-T12 — Write the now-vs-later setup boundary note
 
