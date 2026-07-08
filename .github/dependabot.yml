@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Python dependencies managed via uv (pyproject.toml + uv.lock).
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Keep GitHub Actions versions (e.g. astral-sh/setup-uv, softprops/action-gh-release)
+  # up to date and patched.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
