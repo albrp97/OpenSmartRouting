@@ -223,7 +223,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** In Progress
 - **Objective:** Define a lean, low-ceremony release process for the CLI.
 - **Scope:** Adopt manual semver git tags (`vX.Y.Z`) plus a `CHANGELOG.md`, and add a release workflow that builds and attaches artifacts to a GitHub Release when a tag is pushed.
 - **Steps:**
@@ -235,6 +235,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T10
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `CHANGELOG.md`, documenting the tagging convention, and adding `.github/workflows/release.yml`).
 
 ### Ticket P0-E0-T12 — Write the now-vs-later setup boundary note
 

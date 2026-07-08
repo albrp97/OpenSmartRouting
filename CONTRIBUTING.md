@@ -117,4 +117,25 @@ and branch deletion.
 If this rule ever needs to change (e.g. adding required reviews once the project has more than
 one contributor), update it with the same API call or through the UI, and update this section.
 
+## Release process
+
+Releases are lean and manual — no automatic version bumping.
+
+- **Versioning:** [Semantic Versioning](https://semver.org/) via git tags of the form `vX.Y.Z`
+  (e.g. `v0.1.0`), matching the `version` field in `pyproject.toml`.
+- **When to release:** whenever a set of merged changes is worth marking as a usable milestone
+  (e.g. end of a phase, or a meaningful CLI capability). Not every merged PR needs a release.
+- **Changelog:** every release gets an entry in `CHANGELOG.md` (["Keep a Changelog"](https://keepachangelog.com/en/1.1.0/)
+  format) before tagging, describing what changed since the previous release.
+- **Cutting a release:**
+  1. Update the `version` field in `pyproject.toml` and move the `[Unreleased]` entry in
+     `CHANGELOG.md` into a new dated version section.
+  2. Commit that on `main` (via a normal PR).
+  3. Tag the resulting commit: `git tag vX.Y.Z && git push origin vX.Y.Z`.
+  4. Pushing the tag triggers `.github/workflows/release.yml`, which re-runs the full check suite,
+     builds the wheel/sdist with `uv build`, and attaches them to a new GitHub Release (tags
+     containing a `-`, e.g. `v0.1.0-rc1`, are marked as a pre-release automatically).
+- **No PyPI publishing** at this stage — see the "Packaging" section of `README.md`.
+
+
 
