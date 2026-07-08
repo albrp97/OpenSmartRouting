@@ -478,7 +478,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Make explicit what is intentionally deferred so later phases do not re-litigate setup decisions.
 - **Scope:** Confirm `docs/guide/quality-gates.md` (added alongside this batch of tickets) fully covers the now-vs-later boundary; add any missing deferred items and trigger conditions found during execution of T12–T23.
 - **Steps:**
@@ -490,8 +490,27 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — Done (reconciled `docs/guide/quality-gates.md` against T12–T23's actual execution: all 14 "Active now" ticket references confirmed correct, **except** "Pre-commit hooks mirroring CI checks" which cited P0-E0-T26 — a ticket that was actually the Phase 1 readiness ticket, meaning pre-commit hooks were never implemented despite being listed as active. Fixed by adding new ticket P0-E0-T25 to actually implement pre-commit hooks, and renumbering the phase-closing tickets: old T25 (review) → T26, old T26 (Phase 1 readiness) → T27. Updated the quality-gates.md row and all "Current execution order"/Dependencies cross-references accordingly. Cross-checked the "Deferred" table against `docs/planning/phases.md` Phase 0 non-goals — consistent, no other gaps found.).
 
-### Ticket P0-E0-T25 — Review Phase 0 work for inconsistencies and required changes
+### Ticket P0-E0-T25 — Add pre-commit hooks mirroring CI checks
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P3
+- **Status:** Not Started
+- **Objective:** Give fast local feedback that mirrors the CI quality gate, so obvious failures (format, lint, secrets) are caught before push instead of after opening a PR.
+- **Scope:** Add an opt-in `pre-commit` config running the same low-cost, fast checks already in `make check` (format, lint) plus a local gitleaks-style secret pre-check; do not duplicate the slower checks (mypy, vulture, pip-audit, tests) that already fail fast in CI. Opt-in only — do not force-install hooks on every clone.
+- **Steps:**
+  1. Add a `.pre-commit-config.yaml` using `pre-commit`, hooking `ruff format --check`, `ruff check`, and a secret-detection hook (e.g. `gitleaks protect` or `detect-secrets`) as fast local checks.
+  2. Document the opt-in setup command (`uv run pre-commit install`) in `CONTRIBUTING.md`.
+  3. Do not add a CI step requiring pre-commit to have run — this is a local convenience, not a gate; CI already independently enforces format/lint/secrets.
+- **Acceptance:** Running `uv run pre-commit run --all-files` locally reports the same format/lint result as `make check`'s format/lint steps; a deliberately introduced secret is caught by the local hook.
+- **Validation:** Run `uv run pre-commit install`, make a deliberately unformatted commit, confirm the hook blocks it; make a deliberate secret-shaped commit, confirm the hook blocks it; revert both, confirm a clean commit passes.
+- **Dependencies:** P0-E0-T7, P0-E0-T16
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created during P0-E0-T24's reconciliation: `docs/guide/quality-gates.md` listed "Pre-commit hooks mirroring CI checks" as Active Now citing P0-E0-T26, but no such ticket or config ever existed — P0-E0-T26 is the Phase 1 readiness ticket. This new ticket closes that gap).
+
+### Ticket P0-E0-T26 — Review Phase 0 work for inconsistencies and required changes
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
@@ -505,11 +524,11 @@ Every ticket also carries a **Status History** log recording each status change 
   3. Either mark specific earlier tickets **Needs Rework** with a reason, or confirm the phase outputs are internally consistent enough to close.
 - **Acceptance:** The repo contains a concise Phase 0 review result that either lists the required fixes (with ticket-level rework flags) or states the phase is consistent enough to close.
 - **Validation:** Verify the review explicitly checks every Phase 0 "Expected output" and every ticket in this file.
-- **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23, P0-E0-T24
+- **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23, P0-E0-T24, P0-E0-T25
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the rest of Phase 0's execution tickets).
 
-### Ticket P0-E0-T26 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
+### Ticket P0-E0-T27 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
@@ -519,11 +538,11 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Scope:** Cross-check `docs/planning/tickets-phase-1.md` against the delivered Phase 0 baseline. Since Phase 1 tickets already exist, this is a reconciliation pass, not a from-scratch planning pass.
 - **Steps:**
   1. Re-read `docs/planning/tickets-phase-1.md` and confirm none of its tickets assumed a different local/CI setup than what Phase 0 actually delivered.
-  2. If Phase 0 review (P0-E0-T25) found deferred or follow-up work that is not just a rework of an existing ticket, add it as a new ticket in this file with status **Not Started**, rather than leaving it implicit.
+  2. If Phase 0 review (P0-E0-T26) found deferred or follow-up work that is not just a rework of an existing ticket, add it as a new ticket in this file with status **Not Started**, rather than leaving it implicit.
   3. Record the reconciliation result (clean handoff, or list of adjustments made) at the end of this file.
 - **Acceptance:** The repo states explicitly that Phase 1 tickets remain valid after Phase 0 setup, or lists the adjustments made to either phase's ticket set.
 - **Validation:** Verify the reconciliation note cross-references specific ticket IDs in both files rather than making a general claim.
-- **Dependencies:** P0-E0-T25
+- **Dependencies:** P0-E0-T26
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the Phase 0 review ticket).
 
@@ -570,7 +589,8 @@ Then the expanded quality-gate layer (see `docs/guide/quality-gates.md`), each i
 Finally, the phase-closing sequence:
 
 24. **P0-E0-T24** — Write the now-vs-later setup boundary note
-25. **P0-E0-T25** — Review Phase 0 work for inconsistencies and required changes
-26. **P0-E0-T26** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
+25. **P0-E0-T25** — Add pre-commit hooks mirroring CI checks
+26. **P0-E0-T26** — Review Phase 0 work for inconsistencies and required changes
+27. **P0-E0-T27** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 These stay intentionally narrow so the DevOps baseline can be delivered in small, independently verifiable steps.
