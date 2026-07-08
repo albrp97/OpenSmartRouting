@@ -32,6 +32,27 @@ free-first and Python-first constraints better than any commercial or closed roa
 - Geofabrik publishes a **Spain extract** and marks it as updated **daily**, with regional update files also available.  
   Source: [Geofabrik Spain extract](https://download.geofabrik.de/europe/spain.html)
 
+### Road-data refresh path
+
+**Practical update mechanism:** Geofabrik republishes the full Spain `.osm.pbf` extract on a
+**daily** cadence, and also publishes incremental **diff/changeset files** (via its `updates/`
+directory, consumable with tools like `osmupdate` or `osmium`) for anyone who wants to apply
+updates without re-downloading the full extract. For this project's current scale, the practical
+refresh path for research and experiments is simply **re-downloading the daily full extract** —
+no diff-based pipeline is needed yet, since experiment runs are periodic and manual rather than
+continuous.
+
+**Why this is enough for the research phase:** the research phase does not run a live service, so
+there is no requirement for near-real-time freshness. A daily-or-less-frequent manual
+re-download keeps the data recent enough to validate geocoding and routing behavior against
+realistic road networks. **The freshness question stays explicit** as a still-open item for later
+phases: whether daily OSM freshness is good enough in the specific towns/delivery areas that
+matter for the real use case is listed under "Still unproven for this repo" below, and should be
+revisited before any production or near-real-time refresh pipeline is built.
+
+Source: [Geofabrik Spain extract](https://download.geofabrik.de/europe/spain.html),
+[OSM wiki — Planet.osm/diffs](https://wiki.openstreetmap.org/wiki/Planet.osm/diffs)
+
 ### Geocoding
 
 - CartoCiudad provides official Spain-focused geocoding over addresses, roads, house numbers, postal codes, POIs, and related national geographic data.  
