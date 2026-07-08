@@ -393,6 +393,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
   - 2026-07-08 — In Progress (setting `fail_under` and wiring it into `make test` and CI).
+  - 2026-07-08 — Done. Set `fail_under = 80` (current coverage is 83%). Locally validated: pytest exits 1 with "FAIL Required test coverage of 80.0% not reached" when a deliberately untested branch dropped coverage to 60%, exits 0 after revert. Live-validated on PR #27: `lint-and-test` failed on the same deliberate untested-branch commit, then passed again after a revert commit.
 
 ### Ticket P0-E0-T20 — Add a lockfile drift check to CI
 
