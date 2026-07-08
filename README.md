@@ -79,6 +79,26 @@ make check
 
 See `CONTRIBUTING.md` for the branch naming and commit message conventions.
 
+## Packaging
+
+The CLI is packaged as a standard Python wheel/sdist using the `hatchling` build backend already
+declared in `pyproject.toml`.
+
+```bash
+# build a wheel and sdist into dist/
+uv build
+
+# install the built wheel into any Python environment
+pip install dist/opensmartrouting-<version>-py3-none-any.whl
+
+# the CLI entry point is then available directly
+opensmartrouting
+```
+
+This is for local/personal installation only — **publishing to PyPI is explicitly out of scope**
+for now, since the current use case is a personal/local CLI tool, not a published package.
+`dist/` is gitignored; it is a local build output, not something committed.
+
 ## Core problem
 
 The problem is not just "show a route on a map."
