@@ -72,3 +72,18 @@ Every ticket in `docs/planning/tickets-phase-N.md` has a `Status` and an append-
 `Status History`. Updating these is not a separate, optional step — it happens in the same
 commit (or PR) as the work: mark `In Progress` when starting, and `Done`
 (or `Needs Rework` with a reason) when finishing, with a dated history entry each time.
+
+## Pull request flow
+
+- **One PR per ticket.** A PR's scope is exactly one ticket from a `docs/planning/tickets-phase-N.md`
+  file. If a ticket turns out to need splitting, split the ticket first, not the PR.
+- **Pass `make check` locally before opening the PR.** `make check` runs the full local quality
+  gate (format check, lint, tests). A PR should never be opened to "see if CI catches it" —
+  validate locally first.
+- Every PR uses `.github/PULL_REQUEST_TEMPLATE.md`, which asks for: what changed, which ticket it
+  closes, and how it was validated.
+- Once CI exists (see the CI ticket in `docs/planning/tickets-phase-0.md`), CI must also pass
+  before merging.
+- Merge with squash and delete the branch afterward (`gh pr merge --squash --delete-branch`,
+  then `git fetch --prune` locally) to keep history linear and branches short-lived.
+
