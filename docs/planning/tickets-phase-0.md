@@ -372,6 +372,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T4, P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `vulture` dev dependency, `Makefile` target, and CI step).
 
 ### Ticket P0-E0-T19 — Gate CI on a minimum coverage threshold
 
