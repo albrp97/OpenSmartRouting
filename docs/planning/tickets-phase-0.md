@@ -392,6 +392,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T9
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (setting `fail_under` and wiring it into `make test` and CI).
 
 ### Ticket P0-E0-T20 — Add a lockfile drift check to CI
 
