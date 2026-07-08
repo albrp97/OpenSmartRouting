@@ -314,6 +314,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (confirming/enabling secret scanning and push protection; documenting the setting).
+  - 2026-07-08 — Done. Confirmed via `gh api repos/albrp97/OpenSmartRouting --jq '.security_and_analysis'` that `secret_scanning`, `secret_scanning_push_protection`, and `dependabot_security_updates` all report `"enabled"` (enabled by default for this public repo; `vulnerability-alerts` and `automated-security-fixes` were explicitly enabled via `gh api --method PUT` during P0-E0-T14). Documented the setting and the confirm/re-enable commands in `CONTRIBUTING.md`.
 
 ### Ticket P0-E0-T16 — Add gitleaks as a CI secret-scanning backup
 

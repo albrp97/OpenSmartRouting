@@ -117,6 +117,32 @@ and branch deletion.
 If this rule ever needs to change (e.g. adding required reviews once the project has more than
 one contributor), update it with the same API call or through the UI, and update this section.
 
+## Secret scanning and push protection
+
+GitHub's native secret scanning and push protection are enabled for this public repository
+(free for public repos). Secret scanning flags known credential patterns already committed to the
+repo; push protection blocks a push containing a detectable secret before it ever lands in
+history. Dependabot security updates are also enabled, so Dependabot can open PRs for known
+vulnerable dependencies once any are added.
+
+Confirm the current state at any time with:
+
+```bash
+gh api repos/albrp97/OpenSmartRouting --jq '.security_and_analysis'
+```
+
+This should show `secret_scanning`, `secret_scanning_push_protection`, and
+`dependabot_security_updates` all as `"enabled"`. If a setting is ever `"disabled"`, re-enable it
+via the GitHub UI (**Settings → Code security**) or:
+
+```bash
+gh api --method PUT repos/albrp97/OpenSmartRouting/vulnerability-alerts
+gh api --method PUT repos/albrp97/OpenSmartRouting/automated-security-fixes
+```
+
+`.github/workflows/pr-checks.yml` also runs `gitleaks` on every PR as a CI-visible backup to
+GitHub's background scanning (see the "Secret scanning" step in that workflow).
+
 ## Release process
 
 Releases are lean and manual — no automatic version bumping.
