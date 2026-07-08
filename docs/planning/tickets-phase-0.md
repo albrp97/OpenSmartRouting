@@ -183,7 +183,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Make test coverage visible on every PR without gating on a strict threshold yet.
 - **Scope:** Add `pytest-cov`, generate a coverage report in CI, and upload it as a PR artifact or step summary.
 - **Steps:**
@@ -195,6 +195,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `pytest-cov`, wiring `--cov` into `make test`/CI, and publishing a coverage summary in the CI job).
+  - 2026-07-08 — Done. Added `pytest-cov` dev dependency, `[tool.coverage.run]`/`[tool.coverage.report]` config, updated `make test` and `pr-checks.yml` to run `pytest --cov=opensmartrouting --cov-report=term-missing --cov-report=html`, publish the term-missing table to `$GITHUB_STEP_SUMMARY`, and upload the HTML report as a workflow artifact. No coverage threshold gating. Live-validated on PR #10: CI log shows the coverage table (83% total, per-file breakdown), and `coverage-html-report` artifact confirmed present via the GitHub API. Locally, `make check`/`uv run pytest --cov=...` shows the same table.
 
 ### Ticket P0-E0-T10 — Define the packaging process for the CLI
 

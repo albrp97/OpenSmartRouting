@@ -12,4 +12,4 @@ lint:
 	uv run ruff check .
 
 test:
-	uv run pytest
+	uv run pytest --cov=opensmartrouting --cov-report=term-missing

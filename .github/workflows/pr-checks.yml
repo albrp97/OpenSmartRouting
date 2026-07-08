@@ -21,5 +21,18 @@ jobs:
         run: uv run ruff format --check .
       - name: Lint
         run: uv run ruff check .
-      - name: Test
-        run: uv run pytest
+      - name: Test with coverage
+        run: |
+          uv run pytest --cov=opensmartrouting --cov-report=term-missing --cov-report=html | tee coverage-output.txt
+          {
+            echo "## Coverage report"
+            echo '```'
+            cat coverage-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload coverage HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html-report
+          path: htmlcov/
