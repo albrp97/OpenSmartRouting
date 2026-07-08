@@ -87,3 +87,34 @@ commit (or PR) as the work: mark `In Progress` when starting, and `Done`
 - Merge with squash and delete the branch afterward (`gh pr merge --squash --delete-branch`,
   then `git fetch --prune` locally) to keep history linear and branches short-lived.
 
+## Branch protection on `main`
+
+`main` is protected: it requires the `lint-and-test` status check (from
+`.github/workflows/pr-checks.yml`) to pass before a PR can be merged, and this is enforced even
+for repo admins. Force pushes and branch deletion are also disabled on `main`.
+
+This was applied via the GitHub API:
+
+```bash
+gh api --method PUT repos/albrp97/OpenSmartRouting/branches/main/protection \
+  --input - <<'EOF'
+{
+  "required_status_checks": { "strict": true, "contexts": ["lint-and-test"] },
+  "enforce_admins": true,
+  "required_pull_request_reviews": null,
+  "restrictions": null,
+  "allow_force_pushes": false,
+  "allow_deletions": false
+}
+EOF
+```
+
+Equivalent manual steps (GitHub UI): **Settings → Branches → Branch protection rules → Add rule**
+for `main`, enable "Require status checks to pass before merging" and select `lint-and-test`,
+enable "Do not allow bypassing the above settings" (enforces admins too), and disable force pushes
+and branch deletion.
+
+If this rule ever needs to change (e.g. adding required reviews once the project has more than
+one contributor), update it with the same API call or through the UI, and update this section.
+
+

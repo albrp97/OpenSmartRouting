@@ -163,7 +163,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Ensure `main` cannot be merged into without the CI checks passing.
 - **Scope:** Document (and where the current GitHub plan/permissions allow, configure) branch protection on `main` requiring the PR-checks workflow to pass before merge.
 - **Steps:**
@@ -175,6 +175,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (applying branch protection via the GitHub API, then documenting it in `CONTRIBUTING.md`).
+  - 2026-07-08 — Done. Confirmed the acting account (albrp97) has repo admin rights, then applied branch protection on `main` via the GitHub API: required status check `lint-and-test`, `enforce_admins: true`, force pushes and branch deletion disabled. Live-validated: pushed a deliberate lint break on a throwaway PR (#8), confirmed CI failed, then confirmed `gh pr merge` was rejected with "the base branch policy prohibits the merge" (no `--admin` override used) — closed and deleted that test PR/branch afterward. Documented the exact `gh api` command and the equivalent manual GitHub UI steps in `CONTRIBUTING.md`.
 
 ### Ticket P0-E0-T9 — Wire coverage reporting into CI
 
