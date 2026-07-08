@@ -1,7 +1,2 @@
 requireReadmeAsSourceOfTruth: true
-pythonFirst: true
-cliFirst: true
-androidLater: true
-freeStackRequired: true
-planningExecutionDeferred: true
-requireResearchBeforeStackLock: true
+  badIndent: true
