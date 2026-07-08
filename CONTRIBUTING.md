@@ -83,7 +83,8 @@ commit (or PR) as the work: mark `In Progress` when starting, and `Done`
 - Every PR uses `.github/PULL_REQUEST_TEMPLATE.md`, which asks for: what changed, which ticket it
   closes, and how it was validated.
 - Once CI exists (see the CI ticket in `docs/planning/tickets-phase-0.md`), CI must also pass
-  before merging.
+  before merging. See `docs/guide/ci-pipeline.md` for a diagram and full breakdown of every CI
+  job that runs on a PR, what it checks, and which one is a required status check.
 - Merge with squash and delete the branch afterward (`gh pr merge --squash --delete-branch`,
   then `git fetch --prune` locally) to keep history linear and branches short-lived.
 

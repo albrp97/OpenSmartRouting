@@ -77,7 +77,8 @@ make check
 
 `pyproject.toml` defines the package (`src/opensmartrouting/`) and the `opensmartrouting` CLI entry point. `uv.lock` pins exact dependency versions for reproducible installs. This is Phase 0 scaffolding only — no routing logic yet.
 
-See `CONTRIBUTING.md` for the branch naming and commit message conventions.
+See `CONTRIBUTING.md` for the branch naming and commit message conventions, and
+`docs/guide/ci-pipeline.md` for a diagram of the full CI/CD pipeline (PR checks through release).
 
 ## Packaging
 
