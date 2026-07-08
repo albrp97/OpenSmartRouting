@@ -15,7 +15,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-def _bad_typed() -> int:
-    return "not an int"
