@@ -449,6 +449,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding a `docs-links` CI job using `lycheeverse/lychee-action`).
 
 ### Ticket P0-E0-T23 — Add schema linting for harmonic-custom/config.yml
 

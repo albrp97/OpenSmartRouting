@@ -1,0 +1,26 @@
+name: Docs Links
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/*.md"
+      - ".lychee.toml"
+      - ".github/workflows/docs-links.yml"
+
+jobs:
+  docs-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --config .lychee.toml
+            --no-progress
+            README.md CONTRIBUTING.md CHANGELOG.md docs/**/*.md
+          fail: true
