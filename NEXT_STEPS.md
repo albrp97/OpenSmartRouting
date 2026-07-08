@@ -20,24 +20,33 @@ The repo now has:
 
 The project does **not** yet have:
 
-- planning artifacts
-- research documents
+- an experiment plan
 - experiments
 - source code
 - tests
 - CI setup
 
+Planning artifacts completed so far:
+
+- `vision.md` covering the project objective plus problem / users / success
+- `docs/planning/repo-map.md` covering the current repository structure
+- `docs/planning/scope.md` defining the current product boundary
+- `docs/planning/capability-map.md` mapping the approved capabilities, including the foundational delivery workflow/DevOps capability
+- `docs/planning/epics.md` grouping the capabilities into outcome-based workstreams, including Epic 0 (delivery workflow and DevOps setup)
+- `docs/planning/phases.md` sequencing those epics into the staged delivery path, led by Phase 0 (delivery workflow and DevOps setup)
+- `docs/planning/tickets-phase-0.md` and `docs/planning/tickets-phase-1.md` breaking each phase into minimal execution units, one tickets file per phase, each ticket carrying a full status history
+- `docs/research/free-routing-stack.md` comparing the free stack candidates and tradeoffs
+
 ## What to do next, in order
 
-1. **Run the planning baseline**
-   - repository map
-   - project objective
-   - problem / users / success
-   - scope
-   - capability map
-   - epics
-   - phases
-   - tickets
+1. **Run Phase 0: delivery workflow and DevOps setup**
+   - Python project scaffolding and local commands (format, lint, test)
+   - branch and PR conventions
+   - CI workflow (lint + test) on every PR
+   - coverage reporting
+   - packaging process for the CLI
+   - release process for the CLI
+   - Android tooling stays deferred
 
 2. **Research the free stack**
    - map data
@@ -59,20 +68,15 @@ The project does **not** yet have:
    - validation method
    - what is in scope for the first useful version
 
-5. **Set up the delivery workflow**
-   - branch and PR conventions
-   - local quality commands
-   - initial validation flow
-   - CI only when the repo has enough code to justify it
-
-6. **Start the first implementation ticket**
-   - only after the planning and MVP boundary are clear
+5. **Start the first implementation ticket**
+   - only after Phase 0 is delivered and the planning/MVP boundary is clear
 
 ## Recommended first concrete actions
 
-If the next session starts now, the best immediate sequence is:
+From the current state, the best immediate sequence is:
 
-1. run the objective and problem/users/success workflows
-2. run the free-stack research workflow
-3. define the experiment plan
-4. only then move toward MVP scoping
+1. execute `docs/planning/tickets-phase-0.md` ticket by ticket and deliver the DevOps baseline (CI, coverage, packaging, release)
+2. finish the remaining ready research tickets
+3. then define the experiment plan and Python MVP boundary
+4. keep architecture decisions provisional until the experiments produce evidence
+5. only then expand into implementation work

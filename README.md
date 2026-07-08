@@ -30,10 +30,20 @@ Added setup layer:
 
 What has **not** been done yet:
 
-- the planning breakdown has not been executed
-- no research document has been written yet
+- the experiment plan has not been written yet
 - no experiments have been run yet
 - no MVP implementation has started yet
+
+Planning work completed so far:
+
+- `vision.md` now defines the current objective, primary user, core problem, success signals, and non-goals
+- `docs/planning/repo-map.md` now maps the repository structure and current scaffolding
+- `docs/planning/scope.md` now defines the current product boundary
+- `docs/planning/capability-map.md` now defines the current capability set without turning it into tasks
+- `docs/planning/epics.md` now groups the capabilities into outcome-based workstreams
+- `docs/planning/phases.md` now sequences the epics into the staged delivery path
+- `docs/planning/tickets-phase-0.md` and `docs/planning/tickets-phase-1.md` now break each phase into minimal execution units with priorities, dependencies, and full status history (one tickets file per phase)
+- `docs/research/free-routing-stack.md` now compares the free road, geocoding, routing, and optimization options
 
 Use `NEXT_STEPS.md` for the ordered follow-up work.
 
@@ -71,7 +81,8 @@ Current assumption for the first usable version:
 
 - the main interface is a **CLI tool**
 - it outputs the ordered route or ordered stop list
-- the result can later be entered manually into Google Maps or Waze if direct turn-by-turn navigation is out of scope
+- it generates a one-tap Google Maps directions link for the route (no API key needed), batched into multiple links if the route exceeds Google Maps' waypoint limit
+- the plain address list is always available too, as a manual fallback into Google Maps or Waze
 
 ### Phase 2 — Android product
 
@@ -108,7 +119,7 @@ The first release should stay narrow.
 - ordered list of stops
 - ordered list with coordinates
 - ordered list with estimated distance or duration
-- optional export format if a useful free handoff format is found
+- a one-tap Google Maps directions link built from the ordered route (free, no API key)
 
 ### Out of scope for the first release
 
@@ -458,10 +469,9 @@ The point of the earlier stages is to make this decision from real evidence, not
 
 After this README, the most useful next documents would be:
 
-1. `vision.md` — project purpose, users, constraints, success criteria
-2. `docs/planning/repo-map.md` — once real code exists
-3. `docs/research/free-routing-stack.md` — compare data/routing/optimization options
-4. `docs/specs/python-prototype.md` — exact scope for the first prototype
+1. experiment-planning documentation for route-quality evaluation
+2. `docs/specs/python-prototype.md` — exact scope for the first prototype
+3. delivery-workflow documentation for branches, validation, and CI boundaries
 
 ## Open questions
 
