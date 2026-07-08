@@ -352,6 +352,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `.github/workflows/codeql.yml`).
+  - 2026-07-08 — Done. Live-validated on PR #25: the `analyze` job ran successfully (Initialize + Analyze steps). Confirmed via `gh api repos/albrp97/OpenSmartRouting/code-scanning/analyses` that CodeQL reported a completed analysis for `python` with `results_count: 0` (no findings on the current minimal scaffold).
 
 ### Ticket P0-E0-T18 — Add dead code detection with vulture
 
