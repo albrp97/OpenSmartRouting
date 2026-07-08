@@ -23,16 +23,18 @@ Establish the lean local development, branch/PR, CI, coverage, packaging, and re
 - coverage reporting wired into CI
 - packaging process for the Python CLI
 - release process (versioning, tagging, changelog) for the Python CLI
-- explicit non-goals for this phase: no Android CI/build pipeline, no paid infrastructure, no cloud hosting
+- the quality gate menu in `docs/guide/quality-gates.md`: the free, low-effort checks that make sense before real routing code exists (type checking, dependency vulnerability scanning, secret scanning, CodeQL, dead code detection, coverage threshold, lockfile drift, release smoke test, docs link check, config schema lint, pre-commit hooks)
+- explicit non-goals for this phase: no Android CI/build pipeline, no paid infrastructure, no cloud hosting, and the checks listed as "deferred" in `docs/guide/quality-gates.md` (integration/mutation/property/contract testing, performance benchmarks, memory leak checks, SBOM, license compliance, container scanning, data schema validation)
 
 **Expected outputs**
 
 - documented local commands for formatting, linting, and testing
 - documented branch and PR flow
 - working CI workflow (lint + test) required on every PR
-- coverage reporting visible in CI
+- coverage reporting visible in CI, with a minimum threshold gate
 - a defined packaging process for the CLI
-- a defined release process for the CLI
+- a defined release process for the CLI, with a post-build smoke test
+- type checking, dead code detection, dependency vulnerability scanning, secret scanning, and CodeQL wired into CI
 - a written now-vs-later boundary so later phases do not re-litigate setup decisions
 
 ## Phase 1: Research

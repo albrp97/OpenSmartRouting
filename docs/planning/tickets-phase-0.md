@@ -238,25 +238,234 @@ Every ticket also carries a **Status History** log recording each status change 
   - 2026-07-08 — In Progress (adding `CHANGELOG.md`, documenting the tagging convention, and adding `.github/workflows/release.yml`).
   - 2026-07-08 — Done. Live-validated by pushing a real `v0.0.1-test` tag (PR #12 merged first): the `Release` workflow ran, built the package, and created a GitHub Release marked `prerelease: true` (tag contains a hyphen). First run surfaced a real bug — `uv build`'s own generated `dist/.gitignore` was picked up by `files: dist/*` and attached as an unwanted `default.gitignore` asset alongside the wheel/sdist. Fixed in a follow-up PR (#13, merged) by restricting `files` to `dist/*.whl` and `dist/*.tar.gz` explicitly. Re-ran the same live tag validation against the fixed workflow: confirmed via `gh release view` that only `opensmartrouting-0.0.1-py3-none-any.whl` and `opensmartrouting-0.0.1.tar.gz` were attached, `prerelease: true`, and auto-generated release notes listed PRs #1-#13. Cleaned up: deleted the test GitHub Release (`gh release delete`) and the test tag both locally and on the remote.
 
-### Ticket P0-E0-T12 — Write the now-vs-later setup boundary note
+### Ticket P0-E0-T12 — Add type checking with mypy
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Catch type errors before real routing/geocoding code makes them expensive to find.
+- **Scope:** Add `mypy` as a dev dependency, a minimal `[tool.mypy]` config, a `make lint-types` (or fold into `make lint`) target, and a CI step.
+- **Steps:**
+  1. Add `mypy` to the dev dependency group and a `[tool.mypy]` config scoped to `src/`.
+  2. Add a `Makefile` target and wire it into `make check`.
+  3. Add a `mypy` step to `.github/workflows/pr-checks.yml`.
+- **Acceptance:** `make check` and the PR CI both run `mypy` and fail on a deliberate type error.
+- **Validation:** Introduce a deliberate type error locally and in a live PR, confirm both `make check` and CI fail, then fix and confirm both pass.
+- **Dependencies:** P0-E0-T4, P0-E0-T7
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T13 — Add dependency vulnerability scanning with pip-audit
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Detect known-vulnerable dependencies automatically.
+- **Scope:** Add `pip-audit` as a dev dependency and a CI step that runs it against the resolved environment.
+- **Steps:**
+  1. Add `pip-audit` to the dev dependency group.
+  2. Add a CI step running `uv run pip-audit`.
+  3. Document the check in `docs/guide/quality-gates.md`.
+- **Acceptance:** CI runs `pip-audit` on every PR and the run is visible in the CI logs.
+- **Validation:** Confirm a live PR's CI run shows the `pip-audit` step executing and passing against the current (empty) dependency set.
+- **Dependencies:** P0-E0-T7
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T14 — Add Dependabot configuration
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Get automated pull requests for outdated or vulnerable dependencies and GitHub Actions versions.
+- **Scope:** Add `.github/dependabot.yml` covering the `pip` (via `uv`-managed `pyproject.toml`) and `github-actions` ecosystems.
+- **Steps:**
+  1. Add `.github/dependabot.yml` with weekly update schedules for both ecosystems.
+  2. Confirm via the GitHub UI/API that Dependabot recognizes the config (no errors on the repo's Dependabot page).
+- **Acceptance:** GitHub's Dependabot config validation shows no errors for the repo.
+- **Validation:** Check `gh api repos/albrp97/OpenSmartRouting/dependabot/... ` or the repo's Insights > Dependency graph > Dependabot page for a valid, error-free config.
+- **Dependencies:** none
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T15 — Enable GitHub secret scanning and push protection
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P1
+- **Status:** Not Started
+- **Objective:** Prevent secrets from ever landing in the repo's history.
+- **Scope:** Enable GitHub's native secret scanning and push protection for the repository (free for public repos) and document the setting.
+- **Steps:**
+  1. Enable secret scanning and push protection via `gh api` or the repo Settings > Code security page.
+  2. Confirm the settings are active via `gh api repos/albrp97/OpenSmartRouting`.
+  3. Document the setting in `CONTRIBUTING.md`.
+- **Acceptance:** The repo shows secret scanning and push protection both enabled.
+- **Validation:** Query the repo's security-and-analysis settings via the API and confirm both features report `enabled`.
+- **Dependencies:** none
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T16 — Add gitleaks as a CI secret-scanning backup
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Add a second, explicit secret-scanning layer that runs in CI and fails the PR, rather than relying solely on GitHub's background scanning.
+- **Scope:** Add a `gitleaks` CI job that scans the PR diff and fails on any finding.
+- **Steps:**
+  1. Add a `gitleaks` step/job to `.github/workflows/pr-checks.yml` (or a dedicated workflow) using the free `gitleaks-action`.
+  2. Confirm it runs on every PR.
+- **Acceptance:** A live PR containing a deliberately fake secret fails the gitleaks check; a clean PR passes.
+- **Validation:** Push a fake, clearly-non-functional secret-shaped string to a throwaway PR branch, confirm gitleaks fails the check, then remove it and confirm the check passes.
+- **Dependencies:** P0-E0-T7
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T17 — Add CodeQL static analysis
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Add free SAST coverage for common vulnerability classes beyond linting.
+- **Scope:** Add `.github/workflows/codeql.yml` using `github/codeql-action` for Python, triggered on PRs to `main` and a weekly schedule.
+- **Steps:**
+  1. Add the CodeQL workflow for the `python` language.
+  2. Confirm the workflow runs and reports to the repo's Security > Code scanning tab.
+- **Acceptance:** CodeQL runs successfully and its results are visible under the repo's code scanning alerts.
+- **Validation:** Confirm via `gh api repos/albrp97/OpenSmartRouting/code-scanning/alerts` (or the Security tab) that CodeQL has run and reported a status (even if zero alerts).
+- **Dependencies:** none
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T18 — Add dead code detection with vulture
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P3
+- **Status:** Not Started
+- **Objective:** Catch unused functions, classes, and variables that ruff's unused-import checks do not cover.
+- **Scope:** Add `vulture` as a dev dependency, a `make` target, and a CI step, with a whitelist file if needed for false positives.
+- **Steps:**
+  1. Add `vulture` to the dev dependency group.
+  2. Add a `Makefile` target and wire it into `make check`.
+  3. Add a CI step; add a `vulture_whitelist.py` only if genuine false positives appear.
+- **Acceptance:** `make check` and CI both run `vulture` and fail on a deliberately introduced unused function.
+- **Validation:** Introduce a deliberately unused function locally, confirm `make check` fails, remove it, confirm it passes; confirm the same in a live PR's CI.
+- **Dependencies:** P0-E0-T4, P0-E0-T7
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T19 — Gate CI on a minimum coverage threshold
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Fail the build if test coverage drops below an agreed floor, instead of only reporting it.
+- **Scope:** Add `--cov-fail-under` to the pytest coverage invocation (local `make test` and CI), set at a floor consistent with the current coverage level.
+- **Steps:**
+  1. Check current coverage percentage from the existing coverage report.
+  2. Set `--cov-fail-under` (via `[tool.coverage.report]` `fail_under` or the CLI flag) at or slightly below current coverage.
+  3. Update `Makefile` and `.github/workflows/pr-checks.yml` accordingly.
+- **Acceptance:** A live PR that drops coverage below the threshold fails CI; a PR at or above the threshold passes.
+- **Validation:** Add a deliberately untested branch of code in a throwaway PR to drop coverage below the threshold, confirm CI fails, then remove it and confirm CI passes.
+- **Dependencies:** P0-E0-T9
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T20 — Add a lockfile drift check to CI
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P3
+- **Status:** Not Started
+- **Objective:** Catch cases where `pyproject.toml` changed but `uv.lock` was not regenerated.
+- **Scope:** Add a CI step that runs `uv lock --check` (or `uv sync --locked`) and fails if the lockfile is out of date.
+- **Steps:**
+  1. Add a `uv lock --check` (or equivalent) step to `.github/workflows/pr-checks.yml`, placed before `uv sync`.
+  2. Document the check in `CONTRIBUTING.md`.
+- **Acceptance:** A live PR with a `pyproject.toml` dependency change but a stale `uv.lock` fails CI at this step.
+- **Validation:** Deliberately edit `pyproject.toml` without updating `uv.lock` in a throwaway PR, confirm the drift check fails, then regenerate the lock and confirm it passes.
+- **Dependencies:** P0-E0-T7
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T21 — Add a post-build smoke test to the release workflow
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P2
+- **Status:** Not Started
+- **Objective:** Catch a broken package before it reaches a GitHub Release, beyond "it built without error."
+- **Scope:** After `uv build` in `.github/workflows/release.yml`, install the built wheel into a fresh virtual environment and run the CLI entry point.
+- **Steps:**
+  1. Add steps to `release.yml`: create a scratch venv, `pip install dist/*.whl`, run `opensmartrouting` and confirm it exits 0.
+  2. Confirm the step runs on the next live tag validation.
+- **Acceptance:** The release workflow fails if the built wheel's CLI entry point cannot run in a clean environment.
+- **Validation:** Push a test tag and confirm the smoke-test step runs and passes against the real built wheel (reuse the test-tag/cleanup pattern from P0-E0-T11).
+- **Dependencies:** P0-E0-T11
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T22 — Add a broken-link checker for docs
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P3
+- **Status:** Not Started
+- **Objective:** Keep the heavily cross-referenced planning docs and README free of broken internal/external links.
+- **Scope:** Add a CI job (e.g. `lycheeverse/lychee-action`) that checks links in `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, and `docs/**/*.md`, running only when those files change.
+- **Steps:**
+  1. Add a `docs-links` job triggered on PRs touching Markdown files.
+  2. Configure a lychee config to ignore known-flaky or intentionally-unresolvable links (e.g. localhost examples).
+- **Acceptance:** A live PR containing a deliberately broken internal link fails the check; removing it passes.
+- **Validation:** Introduce a broken relative link in a throwaway PR, confirm the check fails, fix it, confirm it passes.
+- **Dependencies:** none
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T23 — Add schema linting for harmonic-custom/config.yml
+
+- **Phase:** Phase 0 — Delivery workflow and DevOps setup
+- **Epic:** Epic 0 — Delivery workflow and DevOps setup
+- **Priority:** P3
+- **Status:** Not Started
+- **Objective:** Catch malformed YAML/config drift in `harmonic-custom/config.yml` before it silently breaks the runtime.
+- **Scope:** Add a lightweight YAML syntax/schema check (e.g. `yamllint`, or a minimal JSON-schema check via `python -c`) covering `harmonic-custom/config.yml` and other repo-controlled YAML (`.github/workflows/*.yml`, `.github/dependabot.yml`).
+- **Steps:**
+  1. Add `yamllint` (or equivalent) as a dev dependency with a minimal, low-noise config.
+  2. Add a `Makefile` target and a CI step.
+- **Acceptance:** A live PR with deliberately invalid YAML in `harmonic-custom/config.yml` fails the check; valid YAML passes.
+- **Validation:** Introduce a YAML syntax error in a throwaway PR, confirm the check fails, fix it, confirm it passes.
+- **Dependencies:** P0-E0-T7
+- **Status History:**
+  - 2026-07-08 — Not Started (ticket created).
+
+### Ticket P0-E0-T24 — Write the now-vs-later setup boundary note
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
 - **Status:** Not Started
 - **Objective:** Make explicit what is intentionally deferred so later phases do not re-litigate setup decisions.
-- **Scope:** Add a short section (in `README.md` or a dedicated setup doc) listing what Phase 0 deliberately does not include yet: type checking, coverage gating, PyPI publishing, Android CI, preview environments, SonarQube.
+- **Scope:** Confirm `docs/guide/quality-gates.md` (added alongside this batch of tickets) fully covers the now-vs-later boundary; add any missing deferred items and trigger conditions found during execution of T12–T23.
 - **Steps:**
-  1. List everything Phase 0 intentionally defers and why.
-  2. Cross-check the list against `docs/planning/phases.md` Phase 0 non-goals.
-  3. State the trigger condition for revisiting each deferred item (e.g. "add coverage gating once routing logic exists").
-- **Acceptance:** The repo has a clear, short now-vs-later note that later phases can point to instead of re-deciding setup scope.
-- **Validation:** Confirm the note is consistent with `docs/planning/phases.md` Phase 0 and does not contradict any ticket above.
-- **Dependencies:** P0-E0-T7, P0-E0-T9, P0-E0-T11
+  1. Re-read `docs/guide/quality-gates.md`'s "Deferred, with trigger condition" table against what was actually decided while executing T12–T23.
+  2. Add any deferred item discovered during execution that is not already listed (e.g. a check that turned out to be too costly to add now).
+  3. Cross-check the list against `docs/planning/phases.md` Phase 0 non-goals.
+- **Acceptance:** `docs/guide/quality-gates.md` is a clear, short now-vs-later note that later phases can point to instead of re-deciding setup scope.
+- **Validation:** Confirm the note is consistent with `docs/planning/phases.md` Phase 0 and does not contradict any ticket in this file.
+- **Dependencies:** P0-E0-T7, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
 
-### Ticket P0-E0-T13 — Review Phase 0 work for inconsistencies and required changes
+### Ticket P0-E0-T25 — Review Phase 0 work for inconsistencies and required changes
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
@@ -265,16 +474,16 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Objective:** Review the completed Phase 0 work as a whole and identify inconsistencies, gaps, or changes needed before the phase is considered closed.
 - **Scope:** Review all Phase 0 artifacts together (scaffolding, CI workflows, docs, conventions) for contradictions, missing links, or drift between what was planned and what was actually built. Rework or re-open earlier tickets in this file if the review finds real gaps.
 - **Steps:**
-  1. Re-read the Phase 0 artifacts together: `pyproject.toml`, CI workflow files, `README.md`/`CONTRIBUTING.md` conventions, `CHANGELOG.md`, and `docs/planning/phases.md` Phase 0 section.
+  1. Re-read the Phase 0 artifacts together: `pyproject.toml`, CI workflow files, `README.md`/`CONTRIBUTING.md` conventions, `CHANGELOG.md`, `docs/guide/quality-gates.md`, and `docs/planning/phases.md` Phase 0 section.
   2. Compare what was delivered against the Phase 0 "Expected outputs" in `docs/planning/phases.md`.
   3. Either mark specific earlier tickets **Needs Rework** with a reason, or confirm the phase outputs are internally consistent enough to close.
 - **Acceptance:** The repo contains a concise Phase 0 review result that either lists the required fixes (with ticket-level rework flags) or states the phase is consistent enough to close.
 - **Validation:** Verify the review explicitly checks every Phase 0 "Expected output" and every ticket in this file.
-- **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12
+- **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23, P0-E0-T24
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the rest of Phase 0's execution tickets).
 
-### Ticket P0-E0-T14 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
+### Ticket P0-E0-T26 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
@@ -284,11 +493,11 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Scope:** Cross-check `docs/planning/tickets-phase-1.md` against the delivered Phase 0 baseline. Since Phase 1 tickets already exist, this is a reconciliation pass, not a from-scratch planning pass.
 - **Steps:**
   1. Re-read `docs/planning/tickets-phase-1.md` and confirm none of its tickets assumed a different local/CI setup than what Phase 0 actually delivered.
-  2. If Phase 0 review (P0-E0-T13) found deferred or follow-up work that is not just a rework of an existing ticket, add it as a new ticket in this file with status **Not Started**, rather than leaving it implicit.
+  2. If Phase 0 review (P0-E0-T25) found deferred or follow-up work that is not just a rework of an existing ticket, add it as a new ticket in this file with status **Not Started**, rather than leaving it implicit.
   3. Record the reconciliation result (clean handoff, or list of adjustments made) at the end of this file.
 - **Acceptance:** The repo states explicitly that Phase 1 tickets remain valid after Phase 0 setup, or lists the adjustments made to either phase's ticket set.
 - **Validation:** Verify the reconciliation note cross-references specific ticket IDs in both files rather than making a general claim.
-- **Dependencies:** P0-E0-T13
+- **Dependencies:** P0-E0-T25
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the Phase 0 review ticket).
 
@@ -316,11 +525,26 @@ Then packaging and release:
 
 10. **P0-E0-T10** — Define the packaging process for the CLI
 11. **P0-E0-T11** — Define the release process
-12. **P0-E0-T12** — Write the now-vs-later setup boundary note
+
+Then the expanded quality-gate layer (see `docs/guide/quality-gates.md`), each independent and can run in any order:
+
+12. **P0-E0-T12** — Add type checking with mypy
+13. **P0-E0-T13** — Add dependency vulnerability scanning with pip-audit
+14. **P0-E0-T14** — Add Dependabot configuration
+15. **P0-E0-T15** — Enable GitHub secret scanning and push protection
+16. **P0-E0-T16** — Add gitleaks as a CI secret-scanning backup
+17. **P0-E0-T17** — Add CodeQL static analysis
+18. **P0-E0-T18** — Add dead code detection with vulture
+19. **P0-E0-T19** — Gate CI on a minimum coverage threshold
+20. **P0-E0-T20** — Add a lockfile drift check to CI
+21. **P0-E0-T21** — Add a post-build smoke test to the release workflow
+22. **P0-E0-T22** — Add a broken-link checker for docs
+23. **P0-E0-T23** — Add schema linting for harmonic-custom/config.yml
 
 Finally, the phase-closing sequence:
 
-13. **P0-E0-T13** — Review Phase 0 work for inconsistencies and required changes
-14. **P0-E0-T14** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
+24. **P0-E0-T24** — Write the now-vs-later setup boundary note
+25. **P0-E0-T25** — Review Phase 0 work for inconsistencies and required changes
+26. **P0-E0-T26** — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
 These stay intentionally narrow so the DevOps baseline can be delivered in small, independently verifiable steps.

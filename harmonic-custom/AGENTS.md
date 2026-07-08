@@ -19,3 +19,12 @@ That means:
 - the workflows should exist
 - the next work should be listed
 - the planning breakdown should not be executed until explicitly requested
+
+## Quality gate baseline
+
+`docs/guide/quality-gates.md` is the canonical menu of delivery-quality checks
+(static analysis, dependency/supply-chain scanning, type checking, testing layers,
+security scanning, runtime/behavioral checks, reproducibility, docs/data integrity)
+considered for this project. Consult it before adding or re-litigating any CI/local
+quality check: it records what is active now, what is deferred, and the concrete
+trigger condition for revisiting each deferred item.
