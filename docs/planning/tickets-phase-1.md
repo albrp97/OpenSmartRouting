@@ -43,7 +43,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 1 — Research
 - **Epic:** Epic 1 — Free data and geocoding research
 - **Priority:** P0
-- **Status:** Ready
+- **Status:** Done
 - **Objective:** Confirm how road-data freshness will be handled in the research path.
 - **Scope:** Document the practical refresh path for Spain extracts and note why it is enough for the current phase.
 - **Steps:**
@@ -56,6 +56,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Status History field introduced retroactively. Current status carried over as **Done**; earlier transitions were not tracked before this date.
   - 2026-07-08 — Ready (user reset this ticket from Done to Ready, having found it and several others were marked Done in error; re-executing to confirm/complete the work properly).
+  - 2026-07-08 — In Progress (re-reviewing the road-data refresh path against the acceptance criteria).
+  - 2026-07-08 — Done. Verified `docs/research/free-routing-stack.md` already noted Geofabrik's daily Spain extract, but never described the practical update mechanism, why it's sufficient now, or explicitly cross-referenced the open freshness question. Added a new "Road-data refresh path" subsection stating the practical mechanism (daily full-extract re-download is enough now; diff/changeset files via `osmupdate`/`osmium` exist for later if a live pipeline is ever needed), why a manual daily re-download is sufficient for the research phase (no live service running yet), and an explicit cross-reference to the still-open freshness question already tracked under "Still unproven for this repo".
 
 ### Ticket P1-E1-T3 — Compare Spain-first geocoding candidates
 
