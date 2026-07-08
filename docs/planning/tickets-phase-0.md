@@ -438,7 +438,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P3
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Keep the heavily cross-referenced planning docs and README free of broken internal/external links.
 - **Scope:** Add a CI job (e.g. `lycheeverse/lychee-action`) that checks links in `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, and `docs/**/*.md`, running only when those files change.
 - **Steps:**
@@ -449,6 +449,10 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** none
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding a `docs-links` CI job using `lycheeverse/lychee-action` and a `.lychee.toml`).
+  - 2026-07-08 — Blocked (PR #31's first `docs-links` run correctly caught a real pre-existing bug: `CHANGELOG.md`'s `[Unreleased]`/`[0.0.1]` footer linked to a `v0.0.1` git tag/GitHub Release that has never actually been cut — only throwaway test tags used during P0-E0-T11/T21 validation, each deleted afterward).
+  - 2026-07-08 — In Progress (fixed by removing the premature comparison/release links from `CHANGELOG.md`, replaced with an HTML comment noting when to restore them once a real `v0.0.1` tag exists; `docs-links` now passes cleanly).
+  - 2026-07-08 — Done (live-validated acceptance criteria on PR #31: pushed a deliberately broken relative link in `README.md` → `docs-links` failed; reverted the commit → `docs-links`, `lint-and-test`, `secret-scan`, and CodeQL `analyze` all passed).
 
 ### Ticket P0-E0-T23 — Add schema linting for harmonic-custom/config.yml
 

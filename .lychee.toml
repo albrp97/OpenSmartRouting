@@ -1,0 +1,12 @@
+# Configuration for lychee (docs link checker). See .github/workflows/docs-links.yml.
+
+# Skip localhost/loopback examples and common placeholder/anchor patterns that are not
+# meant to resolve.
+exclude = [
+  "^http://localhost",
+  "^http://127\\.0\\.0\\.1",
+]
+
+# Markdown anchor links (e.g. "#section") aren't checked against real HTTP endpoints;
+# this keeps focus on links that can actually break (external URLs, relative file paths).
+exclude_all_private = false
