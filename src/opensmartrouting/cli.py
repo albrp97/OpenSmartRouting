@@ -15,3 +15,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def _totally_unused_function() -> None:
+    pass
