@@ -540,3 +540,5 @@ These are the most important unanswered questions right now:
 ## Summary
 
 OpenSmartRouting is a Python-first, free-routing project aimed at optimizing multi-stop delivery routes in Spain using free map and routing data, with special attention to one-way streets, small-town geography, and practical real-world use. The first goal is not a full mobile app. The first goal is to prove that a free Python-based routing workflow can generate a stop order good enough to replace or meaningfully compete with the paid tool currently being used.
+
+[broken test link](./this-file-does-not-exist.md)
