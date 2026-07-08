@@ -31,7 +31,7 @@ until there is more code to protect.
 | Runtime/behavioral | Post-build smoke test (install wheel, run CLI) | release workflow | P0-E0-T21 |
 | Docs & data integrity | Broken link checker | CI (docs changes) | P0-E0-T22 |
 | Docs & data integrity | Config/schema lint (`harmonic-custom/config.yml`) | CI | P0-E0-T23 |
-| Reproducibility | Pre-commit hooks mirroring CI checks | local, opt-in | P0-E0-T26 |
+| Reproducibility | Pre-commit hooks mirroring CI checks | local, opt-in | P0-E0-T25 |
 
 ## Deferred, with trigger condition
 
