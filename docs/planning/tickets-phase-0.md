@@ -255,6 +255,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T4, P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `mypy` dev dependency, `[tool.mypy]` config, `Makefile` target, and CI step).
+  - 2026-07-08 — Done. Locally validated: introduced a deliberate type error in `cli.py` (well-formatted, lint-clean) — `make check` stopped at `types` with a clear mypy error; reverted and confirmed `make check` passes with 83% coverage. Live-validated on PR #16: CI passed clean first, then a deliberate type-error commit made the `Type check` step fail (`lint-and-test` job failed), then a revert commit restored a passing CI run.
 
 ### Ticket P0-E0-T13 — Add dependency vulnerability scanning with pip-audit
 
