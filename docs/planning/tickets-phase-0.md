@@ -243,7 +243,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Catch type errors before real routing/geocoding code makes them expensive to find.
 - **Scope:** Add `mypy` as a dev dependency, a minimal `[tool.mypy]` config, a `make lint-types` (or fold into `make lint`) target, and a CI step.
 - **Steps:**
@@ -263,7 +263,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Detect known-vulnerable dependencies automatically.
 - **Scope:** Add `pip-audit` as a dev dependency and a CI step that runs it against the resolved environment.
 - **Steps:**
@@ -283,7 +283,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Get automated pull requests for outdated or vulnerable dependencies and GitHub Actions versions.
 - **Scope:** Add `.github/dependabot.yml` covering the `pip` (via `uv`-managed `pyproject.toml`) and `github-actions` ecosystems.
 - **Steps:**
@@ -302,7 +302,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Prevent secrets from ever landing in the repo's history.
 - **Scope:** Enable GitHub's native secret scanning and push protection for the repository (free for public repos) and document the setting.
 - **Steps:**
@@ -322,7 +322,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Add a second, explicit secret-scanning layer that runs in CI and fails the PR, rather than relying solely on GitHub's background scanning.
 - **Scope:** Add a `gitleaks` CI job that scans the PR diff and fails on any finding.
 - **Steps:**
@@ -341,7 +341,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Add free SAST coverage for common vulnerability classes beyond linting.
 - **Scope:** Add `.github/workflows/codeql.yml` using `github/codeql-action` for Python, triggered on PRs to `main` and a weekly schedule.
 - **Steps:**
@@ -360,7 +360,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P3
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Catch unused functions, classes, and variables that ruff's unused-import checks do not cover.
 - **Scope:** Add `vulture` as a dev dependency, a `make` target, and a CI step, with a whitelist file if needed for false positives.
 - **Steps:**
@@ -380,7 +380,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Fail the build if test coverage drops below an agreed floor, instead of only reporting it.
 - **Scope:** Add `--cov-fail-under` to the pytest coverage invocation (local `make test` and CI), set at a floor consistent with the current coverage level.
 - **Steps:**
@@ -400,7 +400,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P3
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Catch cases where `pyproject.toml` changed but `uv.lock` was not regenerated.
 - **Scope:** Add a CI step that runs `uv lock --check` (or `uv sync --locked`) and fails if the lockfile is out of date.
 - **Steps:**
@@ -419,7 +419,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** Not Started
+- **Status:** Done
 - **Objective:** Catch a broken package before it reaches a GitHub Release, beyond "it built without error."
 - **Scope:** After `uv build` in `.github/workflows/release.yml`, install the built wheel into a fresh virtual environment and run the CLI entry point.
 - **Steps:**
@@ -539,7 +539,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Blocked
+- **Status:** Done
 - **Objective:** Review the completed Phase 0 work as a whole and identify inconsistencies, gaps, or changes needed before the phase is considered closed.
 - **Scope:** Review all Phase 0 artifacts together (scaffolding, CI workflows, docs, conventions) for contradictions, missing links, or drift between what was planned and what was actually built. Rework or re-open earlier tickets in this file if the review finds real gaps.
 - **Steps:**
@@ -551,6 +551,8 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T4, P0-E0-T6, P0-E0-T8, P0-E0-T9, P0-E0-T11, P0-E0-T12, P0-E0-T13, P0-E0-T14, P0-E0-T15, P0-E0-T16, P0-E0-T17, P0-E0-T18, P0-E0-T19, P0-E0-T20, P0-E0-T21, P0-E0-T22, P0-E0-T23, P0-E0-T24, P0-E0-T25, P0-E0-T26
 - **Status History:**
   - 2026-07-08 — Blocked (ticket created; depends on the rest of Phase 0's execution tickets).
+  - 2026-07-08 — In Progress (all dependency tickets are Done; starting the cross-artifact review).
+  - 2026-07-08 — Done. Found and fixed one real data-integrity bug: tickets P0-E0-T12 through P0-E0-T21 (mypy, pip-audit, Dependabot, secret scanning enablement, gitleaks, CodeQL, vulture, coverage threshold, lockfile drift check, release smoke test) each had a `- **Status:** Not Started` header left stale even though their own Status History already recorded a `Done` entry with full local + live-PR validation evidence (PRs #16–#28) and the underlying code/config was confirmed present and working in every case. Corrected all 10 Status headers to `Done`; no rework was needed since the actual deliverables were already correct — only the tracking field was wrong. Re-verified live where practical: branch protection on `main` via `gh api repos/albrp97/OpenSmartRouting/branches/main/protection` still shows exactly `required_status_checks.contexts: ["lint-and-test"]`, `enforce_admins: true`, `allow_force_pushes: false`, `allow_deletions: false`, matching `CONTRIBUTING.md`. Cross-checked every Phase 0 "Expected output" in `docs/planning/phases.md` against the delivered artifacts: (1) documented local commands — `Makefile` (`check`, `format`, `lint`, `types`, `deadcode`, `yamllint`, `test`) + `CONTRIBUTING.md`; (2) documented branch/PR flow — `CONTRIBUTING.md` + `.github/pull_request_template.md`; (3) working CI (lint+test) required on every PR — `.github/workflows/pr-checks.yml` `lint-and-test` job, confirmed as the sole required status check; (4) coverage reporting + threshold gate — `pytest --cov` with `fail_under = 80` in `pyproject.toml` (current coverage ~83%); (5) packaging process — `README.md` "Packaging" section (`uv build`, wheel install); (6) release process + post-build smoke test — `CONTRIBUTING.md` "Release process" section + `.github/workflows/release.yml` smoke-test step; (7) type checking, dead code detection, dependency vulnerability scanning, secret scanning, and CodeQL wired into CI — mypy, vulture, pip-audit, gitleaks + GitHub-native secret scanning, and CodeQL all present as CI jobs/steps; (8) now-vs-later boundary note — `docs/guide/quality-gates.md` "Deferred" section (T24). All 8 expected outputs are satisfied. Also verified `docs/guide/quality-gates.md`'s ticket-ID citations, the "Current execution order" list, and all `Dependencies:` cross-references in this file are internally consistent (no dangling or mismatched ticket IDs). No other gaps found. **Conclusion: Phase 0 is consistent and ready to close**, aside from the Status-header fix applied above.
 
 ### Ticket P0-E0-T28 — Confirm Phase 1 readiness and record any Phase 0 follow-ups
 
