@@ -515,7 +515,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P2
-- **Status:** In Progress
+- **Status:** Done
 - **Objective:** Give a single reference that shows exactly what runs in the pipeline, when, and in what order, so a contributor does not have to reverse-engineer it from five separate workflow YAML files.
 - **Scope:** Add a new doc (`docs/guide/ci-pipeline.md`) containing: (1) a diagram (Mermaid, renders natively on GitHub) of the branch → PR → CI jobs → merge → release flow, showing every workflow file, its triggers, and required vs advisory status; (2) a written breakdown of every check that runs, what it validates, and which workflow file/job it lives in, cross-referencing `docs/guide/quality-gates.md` rather than duplicating it. Link the new doc from `CONTRIBUTING.md` and `README.md` where the PR flow is already described.
 - **Steps:**
@@ -529,6 +529,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created; user asked whether pipeline/test documentation and a diagram existed — it did not, only `docs/guide/quality-gates.md` (what/why) and `CONTRIBUTING.md` (branch/PR conventions in prose) existed, with no visual diagram or full step-by-step breakdown).
   - 2026-07-08 — In Progress (writing `docs/guide/ci-pipeline.md` with a Mermaid diagram and per-check breakdown).
+  - 2026-07-08 — Done (added `docs/guide/ci-pipeline.md` with a Mermaid flowchart and a triggers/required-check table; cross-checked every job against the live `.github/workflows/*.yml` files and the actual branch protection `required_status_checks` (only `lint-and-test` is required). Linked from `CONTRIBUTING.md` and `README.md`. Live-validated on PR #35: `docs-links` passed cleanly against the new doc's links, and all other checks (`lint-and-test`, `secret-scan`, CodeQL `analyze`, `workflow-evals`) passed).
 
 ### Ticket P0-E0-T27 — Review Phase 0 work for inconsistencies and required changes
 
