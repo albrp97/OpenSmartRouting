@@ -183,7 +183,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Phase:** Phase 0 — Delivery workflow and DevOps setup
 - **Epic:** Epic 0 — Delivery workflow and DevOps setup
 - **Priority:** P1
-- **Status:** Not Started
+- **Status:** In Progress
 - **Objective:** Make test coverage visible on every PR without gating on a strict threshold yet.
 - **Scope:** Add `pytest-cov`, generate a coverage report in CI, and upload it as a PR artifact or step summary.
 - **Steps:**
@@ -195,6 +195,7 @@ Every ticket also carries a **Status History** log recording each status change 
 - **Dependencies:** P0-E0-T7
 - **Status History:**
   - 2026-07-08 — Not Started (ticket created).
+  - 2026-07-08 — In Progress (adding `pytest-cov`, wiring `--cov` into `make test`/CI, and publishing a coverage summary in the CI job).
 
 ### Ticket P0-E0-T10 — Define the packaging process for the CLI
 

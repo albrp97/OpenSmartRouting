@@ -64,6 +64,9 @@ uv run opensmartrouting
 # run tests
 uv run pytest
 
+# run tests with a coverage report (no gating threshold yet)
+uv run pytest --cov=opensmartrouting --cov-report=term-missing
+
 # format and lint (ruff is the single tool for both)
 uv run ruff format .
 uv run ruff check .
